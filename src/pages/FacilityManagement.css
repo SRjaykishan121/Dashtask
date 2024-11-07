@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Container styles */
+.container-fluid {
+    background-color: #ecf4ff;
+   
+    border-radius: 12px;
+}
+
+/* Create Note button styling */
+.create-note-btn {
+    background: linear-gradient(90deg, #ff6b6b, #fcb045);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+.create-note-btn:hover {
+    background: linear-gradient(90deg, #ff8566, #ff8a33);
+}
+
+/* Card styling */
+.note-card {
+    background-color: #f0f4ff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+.note-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Save button styling */
+.save-btn {
+    background: linear-gradient(90deg, #ff6b6b, #fcb045);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: background 0.3s;
+}
+.save-btn:hover {
+    background: linear-gradient(90deg, #ff8566, #ff8a33);
+}
+
+/* Modal close button */
+.btn-close {
+    background: transparent;
+    border: none;
+}

@@ -49,7 +49,7 @@ const SideBar = () => {
               </Link>
             </li>
             <li className="p-3">
-              <Link to="/facility-management" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
+              <Link to="/facilitymanagement" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
                 <FaBuilding className="me-3" />
                 <span>Facility Management</span>
               </Link>

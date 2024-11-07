@@ -10,7 +10,7 @@ const NoteCard = ({ note, isOpen, onToggleDropdown }) => {
             className="d-flex justify-content-between align-items-center rounded-top p-2"
             style={{ backgroundColor: "#5678e9" }}
           >
-            <h5 className="card-title">{note.title}</h5>
+            <h5 className="card-title" style={{ fontSize: "16px" }}>{note.title}</h5>
 
             {/* Dropdown trigger image */}
             <img
@@ -30,8 +30,8 @@ const NoteCard = ({ note, isOpen, onToggleDropdown }) => {
             )}
           </div>
           <div className="m-2">
-            <h6 className="card-subtitle mb-1 mt-2 text-muted fw-normal">Description</h6>
-            <p className="card-text">{note.description}</p>
+            <h6 className="card-subtitle mb-1  text-muted fw-normal" style={{ fontSize: "14px" }}>Description</h6>
+            <p className="card-text"  style={{ fontSize: "12px" }}>{note.description}</p>
           </div>
         </div>
       </div>
@@ -62,9 +62,9 @@ const FinancialManagement = () => {
   };
 
   return (
-    <div className="container my-4 financial-management">
+    <div className="container-fluid   pt-3 mt-3 financial-management">
       <div className="d-flex justify-content-between align-items-center mb-3 text-dark">
-        <h2>Note</h2>
+        <h2 style={{fontSize:"20px"}}>Note</h2>
         <button className="btn btn-primary create-note-btn" onClick={handleShowModal}>Create Note</button>
       </div>
       <div className="row">

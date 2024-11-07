@@ -3,7 +3,7 @@ import './ResidentManagement.css';
 import BalanceChart from './BalanceChart';
 import { MdOutlineCurrencyRupee } from "react-icons/md";
 import { FaAngleDown } from "react-icons/fa";
-
+import { FiX } from 'react-icons/fi';
 const ResidentManagement = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -248,9 +248,9 @@ const ResidentManagement = () => {
 
       {/* Complaint List */}
       <div className="row">
-        <div className="col-9">
-          <div className="border rounded complaint-list p-3">
-            <div className="d-flex justify-content-between align-items-center">
+        <div className="col-9 ">
+          <div className="border rounded complaint-list p-3 bg-white">
+            <div className="d-flex justify-content-between align-items-center ">
               <h5>Complaint List</h5>
               <button className="btn border">Month <i className="fas fa-angle-down"></i></button>
             </div>
@@ -385,7 +385,7 @@ const ResidentManagement = () => {
                   <div className="modal-content" style={{ width: "400px" }}>
                     <div className="modal-header">
                       <h5 className="modal-title">View Complaint</h5>
-                      <button type="button" className="btn-close" onClick={handleCloseViewModal}></button>
+                      <button type="button" className="btn-close" onClick={handleCloseViewModal}><FiX size={24} /> {/* Close Icon */}</button>
                     </div>
                     <div className="modal-body">
                       <div className="d-flex align-items-center mb-3">

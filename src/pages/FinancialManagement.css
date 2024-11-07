@@ -4,9 +4,9 @@
     box-sizing: border-box;
 }
 /* Container styles */
-.container {
+.container-fluid {
   background-color: #f7f9fc; /* Light background */
-  padding: 2rem;
+ 
   border-radius: 12px;
 }
 
