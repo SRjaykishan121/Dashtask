@@ -55,7 +55,7 @@ const SideBar = () => {
               </Link>
             </li>
             <li className="p-3">
-              <Link to="/complaint-tracking" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
+              <Link to="/complainttracking" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
                 <FaExclamationCircle className="me-3" />
                 <span>Complaint Tracking</span>
               </Link>
