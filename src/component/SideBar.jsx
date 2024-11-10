@@ -61,9 +61,9 @@ const SideBar = () => {
               </Link>
             </li>
             <li className="p-3">
-              <Link to="/security-management" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
+              <Link to="/FinancialManagementIncome" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
                 <FaShieldAlt className="me-3" />
-                <span>Security Management</span>
+                <span>FinancialManagementIncome</span>
               </Link>
             </li>
             <li className="p-3">
