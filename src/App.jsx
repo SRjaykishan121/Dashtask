@@ -11,6 +11,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.js'
 import FacilityManagement from './pages/FacilityManagement';
 import ComplaintTracking from './pages/ComplaintTracking';
 import FinancialManagementIncome from './pages/FinancialManagementIncome';
+import MemberList from './pages/MemberList';
 function App() {
   return (
     <div className="d-flex"> {/* Flexbox container to position sidebar and content side by side */}
@@ -26,6 +27,7 @@ function App() {
           <Route path='/facilitymanagement' element={<FacilityManagement />}/>
           <Route path='/complainttracking' element={<ComplaintTracking />}/>
           <Route path='/FinancialManagementIncome' element={<FinancialManagementIncome/>}/>
+          <Route path='/MemberList' element={<MemberList/>}/>
         </Routes>
       </div>
     </div>

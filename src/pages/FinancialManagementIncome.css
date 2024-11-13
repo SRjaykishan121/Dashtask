@@ -90,3 +90,16 @@
     border: none;
     font-weight: bold;
     }
+    .note-card {
+      border-radius: 10px;
+      overflow: hidden;
+  }
+  
+  .note-card .card-body {
+      padding: 15px;
+  }
+  
+  .note-card .badge {
+      font-weight: bold;
+  }
+  

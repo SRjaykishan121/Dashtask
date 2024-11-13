@@ -3,16 +3,15 @@ import './FinancialManagementIncome.css';
 import { FaUser } from "react-icons/fa6";
 import { MdTimer } from "react-icons/md";
 import { MdPayment } from "react-icons/md";
-import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa6";
+import { FaCalendarAlt } from "react-icons/fa";
+import { Link } from 'react-router-dom';
+import { FiX } from 'react-icons/fi';
 
 function FinancialManagementIncome() {
     const [activeTab, setActiveTab] = useState('maintenance');
     const [showMainModal, setShowMainModal] = useState(false);
     const [showAddMaintenanceModal, setShowAddMaintenanceModal] = useState(false);
-    const [password, setPassword] = useState('');
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const [isPasswordIncorrect, setIsPasswordIncorrect] = useState(false);
     const [maintenanceAmount, setMaintenanceAmount] = useState('');
     const [penaltyAmount, setPenaltyAmount] = useState('');
     const [dueDate, setDueDate] = useState('');
@@ -21,25 +20,11 @@ function FinancialManagementIncome() {
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
-
-    const togglePasswordVisibility = () => {
-        setIsPasswordVisible(!isPasswordVisible);
-    };
-
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-        setIsPasswordIncorrect(false);
-    };
-
     const handleContinue = () => {
-        if (password !== 'correct_password') { // Replace with actual validation logic
-            setIsPasswordIncorrect(true);
-        } else {
-            setShowMainModal(false);
-            setShowAddMaintenanceModal(true); // Open the Add Maintenance Detail modal
-            setPassword('');
-        }
+        setShowMainModal(false);           // Close the Main Modal
+        setShowAddMaintenanceModal(true);   // Open the Maintenance Detail Modal
     };
+
 
     return (
         <div className="container-fluid p-4" style={{ backgroundColor: '#F4F6F8' }}>
@@ -92,23 +77,17 @@ function FinancialManagementIncome() {
                                     </label>
                                     <div className="input-group">
                                         <input
-                                            type={isPasswordVisible ? 'text' : 'password'}
-                                            className={`form-control ${isPasswordIncorrect ? 'is-invalid' : ''}`}
+                                            type="password"
+                                            className="form-control"
                                             placeholder="Enter password"
-                                            value={password}
-                                            onChange={handlePasswordChange}
                                         />
                                         <button
                                             type="button"
                                             className="btn btn-outline-secondary"
-                                            onClick={togglePasswordVisibility}
                                         >
-                                            {isPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                                            <FaEye />
                                         </button>
                                     </div>
-                                    {isPasswordIncorrect && (
-                                        <div className="invalid-feedback d-block">Incorrect Password.</div>
-                                    )}
                                 </div>
                             </div>
                             <div className="modal-footer">
@@ -187,6 +166,7 @@ function FinancialManagementIncome() {
                                         />
                                         <span className="input-group-text">
                                             <FaCalendarAlt />
+
                                         </span>
                                     </div>
                                 </div>
@@ -271,7 +251,7 @@ function FinancialManagementIncome() {
                 {/* Tab Content */}
                 <div className="tab-content border border-top-0 p-3 bg-white rounded-bottom">
                     {activeTab === 'maintenance' && <MaintenanceDetails />}
-                    {activeTab === 'otherIncome' && <p>Other Income Content</p>}
+                    {activeTab === 'otherIncome' && <OtherIncome />}
                 </div>
             </div>
         </div>
@@ -279,6 +259,18 @@ function FinancialManagementIncome() {
 }
 
 function MaintenanceDetails() {
+    const [showModal, setShowModal] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
+
+    const handleViewClick = (item) => {
+        setSelectedItem(item);
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        setSelectedItem(null);
+    };
     const data = [
         {
             name: 'Cody Fisher',
@@ -424,7 +416,7 @@ function MaintenanceDetails() {
                                         </span>
                                     </td>
                                     <td>
-                                        <button className="btn-action">
+                                        <button className="btn-action" onClick={() => handleViewClick(item)}>
                                             <img src="src/Images/view.png" alt="View" />
                                         </button>
                                     </td>
@@ -434,9 +426,289 @@ function MaintenanceDetails() {
                     </table>
                 </div>
             </div>
+            {/* Modal with Custom Backdrop */}
+            {showModal && (
+                <>
+                    {/* Blurred Overlay */}
+                    <div className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 backdrop-blur"></div>
+
+                    {/* Modal Content */}
+                    <div className="modal fade show d-block" tabIndex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                        <div className="modal-dialog modal-dialog-centered" role="document">
+                            <div className="modal-content" style={{maxWidth:"400px"}}>
+                                <div className="modal-header">
+                                    <h5 className="modal-title" id="modalTitle">View Maintenance Details</h5>
+                                    <button type="button" className="btn-close" aria-label="Close" onClick={handleCloseModal}><FiX size={24} /></button>
+                                </div>
+                                <div className="modal-body">
+                                    {selectedItem && (
+                                        <>
+                                            <div className="d-flex align-items-center mb-3">
+                                                <img
+                                                    src="src/Images/image.png"
+                                                    alt="avatar"
+                                                    className="rounded-circle"
+                                                    style={{ width: "50px", height: "50px" }}
+                                                />
+                                                <div className="ms-3">
+                                                    <h5 className="mb-0">{selectedItem.name}</h5>
+                                                    <p className="text-muted">{selectedItem.date}</p>
+                                                </div>
+                                            </div>
+                                            <div className="d-flex justify-content-between w-100">
+                                                <div style={{ display: "flex", flexDirection: "column" }}>
+                                                    <div>Wing:</div>
+                                                    <span className="badge bg-primary" style={{ marginTop: "4px" }}>A</span>
+                                                </div>
+                                                <div style={{ display: "flex", flexDirection: "column" }}>
+                                                    <div>Unit:</div> 
+                                                {selectedItem.unitNumber}</div>
+                                                <div style={{ display: "flex", flexDirection: "column" }}>
+                                                    <div>Status:</div>
+                                                     <span className="badge bg-primary">{selectedItem.status}</span></div>
+                                                <div>
+                                                    <div>Amount:</div>
+                                                     ₹{selectedItem.amount}</div>
+                                            </div>
+
+                                            <div className="d-flex justify-content-between w-100">
+                                                <div  style={{ display: "flex", flexDirection: "column" }}>
+                                                   <div> Penalty:</div>
+                                                    {selectedItem.penalty}
+                                                    </div>
+                                                <div  style={{ display: "flex", flexDirection: "column" }}>
+                                                   <div> Status:</div>
+                                                    <span className="badge bg-warning">{selectedItem.paymentStatus}</span>
+                                                    </div>
+                                                <div style={{ display: "flex", flexDirection: "column" }}>
+                                                    <div>Payment:</div>
+                                                     <span className={`badge ${selectedItem.paymentMethod === 'Cash' ? 'bg-dark' : 'bg-info'}`}>{selectedItem.paymentMethod}</span></div>
+                                            </div>
+                                        </>
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </>
+            )}
+
 
         </div>
+
     );
 }
+
+// OtherIncome start
+
+const NoteCard = ({ note, isOpen, onToggleDropdown, onEditClick, onDeleteClick }) => {
+    return (
+        <div className="col-md-3 mb-4">
+            <div className="card note-card shadow-sm">
+                <div className="d-flex justify-content-between align-items-center rounded-top p-2" style={{ backgroundColor: "#5678e9", color: "white" }}>
+                    <h5 className="card-title mb-0" style={{ fontSize: "16px" }}>{note.title}</h5>
+                    <img src="src/Images/menu.png" role="button" tabIndex="0" alt="Menu" style={{ width: "20px", height: "20px", cursor: "pointer" }} onClick={onToggleDropdown} />
+                    {isOpen && (
+                        <div className="dropdown-menu show" style={{ position: 'absolute', top: '40px', right: '10px' }}>
+                            <button className="dropdown-item" onClick={() => onEditClick(note)}>Edit</button>
+                            <button className="dropdown-item" onClick={() => onDeleteClick(note)} >Delete</button>
+                            <Link to="/MemberList" className="dropdown-item" >View</Link>
+                        </div>
+                    )}
+                </div>
+                <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-center mb-3">
+                        <span className="text-muted" style={{ fontSize: "12px" }}>Amount Per Member</span>
+                        <span className="badge bg-light text-primary" style={{ fontSize: "14px", padding: "5px 10px", borderRadius: "15px" }}>₹ 1,500</span>
+                    </div>
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                        <span className="text-muted" style={{ fontSize: "12px" }}>Total Member</span>
+                        <span style={{ fontSize: "12px" }}>12</span>
+                    </div>
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                        <span className="text-muted" style={{ fontSize: "12px" }}>Date</span>
+                        <p style={{ fontSize: "12px", margin: "0" }}>{note.Date}</p>
+                    </div>
+                    <div className="d-flex justify-content-between align-items-center mb-2">
+                        <span className="text-muted" style={{ fontSize: "12px" }}>Due Date</span>
+                        <p style={{ fontSize: "12px", margin: "0" }}>10/07/2024</p>
+                    </div>
+                    <div className="mb-2">
+                        <h6 className="card-subtitle mb-1 text-muted fw-bold" style={{ fontSize: "14px" }}>Description</h6>
+                        <p className="card-text" style={{ fontSize: "12px" }}>{note.description}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+const OtherIncome = () => {
+    const notes = [
+        { title: 'Ganesh Chaturthi', description: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.', Date: '01/07/2024' },
+        { title: 'Navratri', description: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.', Date: '01/07/2024' },
+        { title: 'Diwali', description: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.', Date: '01/07/2024' },
+        { title: 'Christmas', description: 'The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in.', Date: '01/07/2024' },
+    ];
+
+    const [dropdownIndex, setDropdownIndex] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [modalType, setModalType] = useState(""); // Track modal type ("create" or "edit")
+    const [currentNote, setCurrentNote] = useState(null);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [selectedNote, setSelectedNote] = useState(null);
+
+    const toggleDropdown = (index) => {
+        setDropdownIndex(dropdownIndex === index ? null : index);
+    };
+
+    const handleCreateClick = () => {
+        setModalType("create");
+        setShowModal(true);
+    };
+
+    const handleEditClick = (note) => {
+        setCurrentNote(note);
+        setModalType("edit");
+        setShowModal(true);
+    };
+
+    // Function to close the create/edit modal
+    const handleCloseEditModal = () => {
+        setShowModal(false);
+        setModalType("");
+        setCurrentNote(null);
+    };
+
+    // Function to open the delete confirmation modal
+    const handleDeleteClick = (note) => {
+        setSelectedNote(note);
+        setShowDeleteModal(true);
+    };
+
+    // Function to close the delete confirmation modal
+    const handleCloseDeleteModal = () => {
+        setShowDeleteModal(false);
+        setSelectedNote(null);
+    };
+
+    const handleConfirmDelete = () => {
+        // Add delete logic here
+        console.log("Deleting:", selectedNote);
+        handleCloseDeleteModal();
+    };
+
+    return (
+        <div className="container-fluid pt-3 mt-3 financial-management">
+            <div className="d-flex justify-content-between align-items-center mb-3 text-dark">
+                <h2 style={{ fontSize: "20px" }}>Other Income</h2>
+                <button className="btn btn-primary create-note-btn" onClick={handleCreateClick}>Create Other Income</button>
+            </div>
+            <div className="row">
+                {notes.map((note, index) => (
+                    <NoteCard
+                        key={index}
+                        note={note}
+                        isOpen={dropdownIndex === index}
+                        onToggleDropdown={() => toggleDropdown(index)}
+                        onEditClick={handleEditClick}
+                        onDeleteClick={() => handleDeleteClick(note)}
+                    />
+                ))}
+            </div>
+
+            {/* Modal */}
+            {showModal && (
+                <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title">
+                                    {modalType === "create" ? "Create Other Income" : `Edit ${currentNote.title}`}
+                                </h5>
+                                <button type="button" className="btn-close" aria-label="Close" onClick={handleCloseEditModal}></button>
+                            </div>
+                            <div className="modal-body">
+                                <form>
+                                    {modalType === "create" && (
+                                        <>
+                                            <div className="form-group mb-1">
+                                                <label>Title*</label>
+                                                <input type="text" className="form-control" placeholder="Enter title" />
+                                            </div>
+                                            <div className="form-row d-flex">
+                                                <div className="form-group col-5 mb-1 me-4">
+                                                    <label>Date*</label>
+                                                    <input type="date" className="form-control" />
+                                                </div>
+                                                <div className="form-group col-5 mb-1">
+                                                    <label>Due Date*</label>
+                                                    <input type="date" className="form-control" />
+                                                </div>
+                                            </div>
+                                            <div className="form-group mb-1">
+                                                <label>Description*</label>
+                                                <textarea className="form-control" rows="3" placeholder="Enter description"></textarea>
+                                            </div>
+                                            <div className="form-group mb-1">
+                                                <label>Amount*</label>
+                                                <input type="text" className="form-control" placeholder="Enter amount" />
+                                            </div>
+                                        </>
+                                    )}
+                                    {modalType === "edit" && currentNote && (
+                                        <>
+                                            <div className="form-group mb-1">
+                                                <label>Amount*</label>
+                                                <input type="text" className="form-control" placeholder="₹ 1,500" value={currentNote.amount || ''} />
+                                            </div>
+                                            <div className="form-row d-flex">
+                                                <div className="form-group col-5 mb-1 me-4">
+                                                    <label>Date*</label>
+                                                    <input type="date" className="form-control" defaultValue={currentNote.Date} />
+                                                </div>
+                                                <div className="form-group col-5 mb-1">
+                                                    <label>Due Date*</label>
+                                                    <input type="date" className="form-control" defaultValue="10/07/2024" />
+                                                </div>
+                                            </div>
+                                            <div className="form-group mb-1">
+                                                <label>Description*</label>
+                                                <textarea className="form-control" rows="3" placeholder="Enter description" defaultValue={currentNote.description}></textarea>
+                                            </div>
+                                        </>
+                                    )}
+                                </form>
+                            </div>
+                            <div className="modal-footer">
+                                <button type="button" className="btn btn-secondary" onClick={handleCloseEditModal} style={{ width: "48%" }}>Cancel</button>
+                                <button type="button" className="btn btn-primary" style={{ width: "48%" }}>Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* Delete Confirmation Modal */}
+            {showDeleteModal && (
+                <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+                    <div className="modal-dialog modal-dialog-centered" role="document">
+                        <div className="modal-content">
+                            <div className="modal-body text-center">
+                                <h5 className="modal-title mb-3">Delete {selectedNote?.title}?</h5>
+                                <p>Are you sure you want to delete this?</p>
+                                <div className="d-flex justify-content-center">
+                                    <button type="button" className="btn btn-secondary me-2" onClick={handleCloseDeleteModal} style={{ width: "48%" }}>Cancel</button>
+                                    <button type="button" className="btn btn-danger" onClick={handleConfirmDelete} style={{ width: "48%" }}>Delete</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+};
+
+
 
 export default FinancialManagementIncome;
