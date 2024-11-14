@@ -504,7 +504,7 @@ function MaintenanceDetails() {
 const NoteCard = ({ note, isOpen, onToggleDropdown, onEditClick, onDeleteClick }) => {
     return (
         <div className="col-md-3 mb-4">
-            <div className="card note-card shadow-sm">
+            <div className="card note-card shadow-sm bg-white">
                 <div className="d-flex justify-content-between align-items-center rounded-top p-2" style={{ backgroundColor: "#5678e9", color: "white" }}>
                     <h5 className="card-title mb-0" style={{ fontSize: "16px" }}>{note.title}</h5>
                     <img src="src/Images/menu.png" role="button" tabIndex="0" alt="Menu" style={{ width: "20px", height: "20px", cursor: "pointer" }} onClick={onToggleDropdown} />

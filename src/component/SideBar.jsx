@@ -67,9 +67,9 @@ const SideBar = () => {
               </Link>
             </li>
             <li className="p-3">
-              <Link to="/security-guard" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
+              <Link to="/RequestTracking" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
                 <FaShieldAlt className="me-3" />
-                <span>Security Guard</span>
+                <span>RequestTracking</span>
               </Link>
             </li>
             <li className="p-3">
