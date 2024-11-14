@@ -7,12 +7,16 @@ import { FiX } from 'react-icons/fi';
 const ResidentManagement = () => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [showDeleteModal1, setShowDeleteModal1] = useState(false);
   const [showViewModal, setShowViewModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
 
 
   const handleShowAddModal = () => setShowAddModal(true);
   const handleCloseAddModal = () => setShowAddModal(false);
+
+  const handleShowDeleteModal1 = () => setShowDeleteModal1(true);
+  const handleCloseDeleteModal1 = () => setShowDeleteModal1(false);
 
   const handleShowDeleteModal = () => setShowDeleteModal(true);
   const handleCloseDeleteModal = () => setShowDeleteModal(false);
@@ -119,7 +123,7 @@ const ResidentManagement = () => {
                             tabIndex="0"
                             src="src/Images/delet.png"
                             alt="delete"
-                            onClick={handleShowDeleteModal}
+                            onClick={handleShowDeleteModal1}
                           />
                           <img className="edit-number" role="button" tabIndex="0" src="src/Images/edit.png" alt="edit" />
                         </div>
@@ -135,7 +139,7 @@ const ResidentManagement = () => {
                   <div className="modal-backdrop show"></div>
                   <div className="modal d-block" tabIndex="-1">
                     <div className="modal-dialog">
-                      <div className="modal-content" style={{ width: "400px", height: "420px" }}>
+                      <div className="modal-content" style={{ width: "400px", height: "420px", marginTop:"200px" }}>
                         <div className="modal-header">
                           <h5 className="modal-title">Add Number</h5>
                           <button type="button" className="btn-close" onClick={handleCloseAddModal}></button>
@@ -176,15 +180,15 @@ const ResidentManagement = () => {
               )}
 
               {/* Delete Confirmation Modal */}
-              {showDeleteModal && (
+              {showDeleteModal1 && (
                 <>
                   <div className="modal-backdrop show"></div>
                   <div className="modal d-block" tabIndex="-1">
                     <div className="modal-dialog">
-                      <div className="modal-content" style={{ width: "400px" }}>
+                      <div className="modal-content" style={{ width: "400px", marginTop:"200px" }}>
                         <div className="modal-header">
                           <h5 className="modal-title">Delete Number?</h5>
-                          <button type="button" className="btn-close" onClick={handleCloseDeleteModal}></button>
+                          <button type="button" className="btn-close" onClick={handleCloseDeleteModal1}></button>
                         </div>
                         <div className="modal-body">
                           <p>Are you sure you want to delete this number?</p>
@@ -194,7 +198,7 @@ const ResidentManagement = () => {
                             type="button"
                             className="btn btn-outline-secondary"
                             style={{ width: "45%" }}
-                            onClick={handleCloseDeleteModal}
+                            onClick={handleCloseDeleteModal1}
                           >
                             Cancel
                           </button>
@@ -204,7 +208,7 @@ const ResidentManagement = () => {
                             style={{ width: "45%" }}
                             onClick={() => {
                               // Add your delete logic here
-                              handleCloseDeleteModal();
+                              handleCloseDeleteModal1();
                             }}
                           >
                             Delete
@@ -371,6 +375,58 @@ const ResidentManagement = () => {
                       </button>
                     </td>
                   </tr>
+                  <tr>
+                    <td className="complainer">
+                      <img src="src/Images/image.png" alt="Complainer" className="complainer-image mb-2 me-2" />
+                      Evelyn Harper
+                    </td>
+                    <td>Unethical Behavior</td>
+                    <td>01/02/2024</td>
+                    <td><span className="badge badge-medium">Medium</span></td>
+                    <td><span className="status open">Open</span></td>
+                    <td className="actions ">
+                      <button className="btn-action mb-2">
+                        <img
+                          className="edit-Complaint"
+                          src="src/Images/edit.png"
+                          alt="Edit"
+                          onClick={handleShowEditModal}
+                        />
+                      </button>
+                      <button className="btn-action">
+                        <img src="src/Images/view.png" alt="View" onClick={handleShowViewModal} />
+                      </button>
+                      <button className="btn-action">
+                        <img src="src/Images/delet.png" alt="Delete" onClick={handleShowDeleteModal} />
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="complainer">
+                      <img src="src/Images/image.png" alt="Complainer" className="complainer-image mb-2 me-2" />
+                      Evelyn Harper
+                    </td>
+                    <td>Unethical Behavior</td>
+                    <td>01/02/2024</td>
+                    <td><span className="badge badge-medium">Medium</span></td>
+                    <td><span className="status open">Open</span></td>
+                    <td className="actions ">
+                      <button className="btn-action mb-2">
+                        <img
+                          className="edit-Complaint"
+                          src="src/Images/edit.png"
+                          alt="Edit"
+                          onClick={handleShowEditModal}
+                        />
+                      </button>
+                      <button className="btn-action">
+                        <img src="src/Images/view.png" alt="View" onClick={handleShowViewModal} />
+                      </button>
+                      <button className="btn-action">
+                        <img src="src/Images/delet.png" alt="Delete" onClick={handleShowDeleteModal} />
+                      </button>
+                    </td>
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -382,7 +438,7 @@ const ResidentManagement = () => {
               <div className="modal-backdrop show"></div>
               <div className="modal d-block" tabIndex="-1">
                 <div className="modal-dialog">
-                  <div className="modal-content" style={{ width: "400px" }}>
+                  <div className="modal-content" style={{ width: "400px", marginTop:"200px" }}>
                     <div className="modal-header">
                       <h5 className="modal-title">View Complaint</h5>
                       <button type="button" className="btn-close" onClick={handleCloseViewModal}><FiX size={24} /> {/* Close Icon */}</button>
@@ -509,7 +565,7 @@ const ResidentManagement = () => {
               <div className="modal-backdrop show"></div>
               <div className="modal d-block" tabIndex="-1">
                 <div className="modal-dialog" >
-                  <div className="modal-content" >
+                  <div className="modal-content" style={{marginTop:"250px"}} >
                     <div className="modal-header">
                       <h5 className="modal-title">Delete Complain?</h5>
                       <button type="button" className="btn-close" onClick={handleCloseDeleteModal}></button>

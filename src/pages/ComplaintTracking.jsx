@@ -408,7 +408,7 @@ function ComplaintTracking() {
                 <div className="modal-backdrop show"></div>
                 <div className="modal d-block" tabIndex="-1">
                   <div className="modal-dialog">
-                    <div className="modal-content" style={{ width: '400px' }}>
+                    <div className="modal-content" style={{ width: '400px',marginTop:"200px" }}>
                       <div className="modal-header">
                         <h5 className="modal-title">View Complaint</h5>
                         <button type="button" className="btn-close" onClick={handleCloseViewModal} > <FiX /></button>
@@ -535,7 +535,7 @@ function ComplaintTracking() {
                 <div className="modal-backdrop show"></div>
                 <div className="modal d-block" tabIndex="-1">
                   <div className="modal-dialog" >
-                    <div className="modal-content" >
+                    <div className="modal-content" style={{marginTop:"200px"}} >
                       <div className="modal-header">
                         <h5 className="modal-title">Delete Complain?</h5>
                         <button type="button" className="btn-close" onClick={handleCloseDeleteModal}></button>
