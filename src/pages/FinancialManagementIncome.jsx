@@ -364,7 +364,7 @@ function MaintenanceDetails() {
 
     return (
         <div className="container">
-            <div className="bg-white rounded  p-3 shadow-sm">
+            <div className="row bg-white rounded  p-3 shadow-sm">
                 <h6 className="mb-3">Maintenance Details</h6>
                 <div className="table-responsive mt-2" style={{ maxHeight: '400px', overflowY: 'auto' }}>
                     <table className="table rounded-table">

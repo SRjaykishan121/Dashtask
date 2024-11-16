@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { Chart as ChartJS, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend } from 'chart.js';
 import './BalanceChart.css';
+import { FaAngleDown } from "react-icons/fa";
 
 // Register Chart.js components
 ChartJS.register(LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip, Legend);
@@ -45,6 +46,7 @@ const BalanceChart = () => {
         beginAtZero: true,
       },
     },
+  
   };
 
   return (
@@ -52,14 +54,31 @@ const BalanceChart = () => {
       <div className="chart-header d-flex justify-content-between align-items-center">
         <h5>Total Balance</h5>
         <div className="dropdown">
-          <button className="btn btn-light dropdown-toggle" type="button" id="timeframeDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-            Month
+          <button
+            className="btn btn-light border  "
+            type="button"
+            id="timeframeDropdown"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Month <FaAngleDown />
+            {/* Display "Month" instead of the selected option */}
           </button>
-          <ul className="dropdown-menu" aria-labelledby="timeframeDropdown">
-            <li><button className="dropdown-item">Last week</button></li>
-            <li><button className="dropdown-item active">Last month</button></li>
-            <li><button className="dropdown-item">Last year</button></li>
-          </ul>
+          <ul className="dropdown-menu text-secondary"  aria-labelledby="timeframeDropdown">
+  <div className="">
+    <input type="radio" id="last-week" name="colors" value="Last-week" style={{Color:'fd6208'}}/>
+    <label className="ms-1" htmlFor="last-week">Last week</label>
+  </div>
+  <div className="">
+    <input type="radio" id="last-month" name="colors" value="Last-month" />
+    <label className="ms-1" htmlFor="last-month">Last month</label>
+  </div>
+  <div className="">
+    <input type="radio" id="last-year" name="colors" value="Last-year" />
+    <label className="ms-1" htmlFor="last-year">Last Year</label>
+  </div>
+</ul>
+
         </div>
       </div>
       <Line data={data} options={options} />
@@ -68,3 +87,7 @@ const BalanceChart = () => {
 };
 
 export default BalanceChart;
+
+
+{/* <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
+<label className='ms-1' htmlFor="Red">High</label> */}

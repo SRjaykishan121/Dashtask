@@ -485,7 +485,7 @@ const ResidentManagement = () => {
               <div className="modal-backdrop show"></div>
               <div className="modal d-block" tabIndex="-1">
                 <div className="modal-dialog modal-dialog-centered">
-                  <div className="modal-content" style={{ width: "400px" }}>
+                  <div className="modal-content" style={{ width: "410px" }}>
                     <div className="modal-header">
                       <h5 className="modal-title">Edit Complaint</h5>
                       <button type="button" className="btn-close" onClick={handleCloseEditModal}></button>
@@ -517,15 +517,15 @@ const ResidentManagement = () => {
                         <div className="my-1">
                           <label className="form-label">Priority*</label>
                           <div className="d-flex gap-2d-flex justify-content-evenly">
-                            <div className="form-check border p-2 rounded  ">
+                            <div className="col-4 form-check border p-2 me-1 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">High</label>
                             </div>
-                            <div className="form-check  border p-2 rounded ">
+                            <div className="col-4 form-check  border p-2 me-1 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Medium</label>
                             </div>
-                            <div className="form-check  border p-2 rounded ">
+                            <div className="col-4 form-check  border p-2 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Low</label>
                             </div>
@@ -534,15 +534,15 @@ const ResidentManagement = () => {
                         <div className="">
                           <label className="form-label">Status*</label>
                           <div className="d-flex gap-2d-flex justify-content-evenly">
-                            <div className="form-check border p-2 rounded  ">
+                            <div className="col-4 form-check border me-1 p-2 rounded text-center ">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Open</label>
                             </div>
-                            <div className="form-check  border p-2 rounded ">
+                            <div className="col-4 form-check  border me-1 p-2 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Pending</label>
                             </div>
-                            <div className="form-check  border p-2 rounded ">
+                            <div className="col-4 form-check  border p-2 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Solve</label>
                             </div>

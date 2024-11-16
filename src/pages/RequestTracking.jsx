@@ -411,7 +411,7 @@ function RequestTracking() {
                       </div>
                       <div className="modal-footer justify-content-between">
                         <button type="button" className="btn btn-secondary" style={{ width: "46%" }} onClick={handleCloseCreateModal}>Cancel</button>
-                        <button type="button" className="btn btn-primary" style={{ width: "46%" }}>Save</button>
+                        <button type="button" className="btn-primary btn" style={{ width: "46%" }}>Save</button>
                       </div>
                     </div>
                   </div>
@@ -544,7 +544,7 @@ function RequestTracking() {
                       </div>
                       <div className="modal-footer justify-content-between">
                         <button type="button" className="btn btn-secondary" style={{ width: "46%" }} onClick={handleCloseEditModal}>Cancel</button>
-                        <button type="button" className="btn btn-primary" style={{ width: "46%" }}>Save</button>
+                        <button type="button" className="btn-primary btn" style={{ width: "46%" }}>Save</button>
                       </div>
                     </div>
                   </div>
