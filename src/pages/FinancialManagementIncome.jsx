@@ -395,7 +395,7 @@ function MaintenanceDetails() {
                                     </td>
                                     <td>{item.date}</td>
                                     <td>
-                                        <span className={`badge ${item.status === 'Owner' ? 'Owner' : 'Tenant'}`} style={{ fontSize: "14px" }}>
+                                        <span className={`badge1 ${item.status === 'Owner' ? 'Owner' : 'Tenant'}`} style={{ fontSize: "14px" }}>
                                             <FaUser className="mb-1" />
                                             {item.status}
                                         </span>
@@ -404,13 +404,13 @@ function MaintenanceDetails() {
                                     <td className="text-success" style={{ fontSize: "14px" }}>{item.amount}</td>
                                     <td><span className="status open" style={{ fontSize: "14px" }}>{item.penalty}</span></td>
                                     <td>
-                                        <span className={`badge ${item.paymentStatus === 'Done' ? 'Done' : 'Pending'}`} style={{ fontSize: "14px" }}>
+                                        <span className={`badge1 ${item.paymentStatus === 'Done' ? 'Done' : 'Pending'}`} style={{ fontSize: "14px" }}>
                                             <MdTimer className="mb-1" />
                                             {item.paymentStatus}
                                         </span>
                                     </td>
                                     <td>
-                                        <span className={`badge ${item.paymentMethod === 'Cash' ? 'Cash' : 'Online'}`} style={{ fontSize: "14px" }}>
+                                        <span className={`badge1 ${item.paymentMethod === 'Cash' ? 'Cash' : 'Online'}`} style={{ fontSize: "14px" }}>
                                             <MdPayment className="mb-1" />
                                             {item.paymentMethod}
                                         </span>

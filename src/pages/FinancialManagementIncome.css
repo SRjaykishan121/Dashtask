@@ -98,5 +98,12 @@
   
   .note-card .badge {
       font-weight: bold;
+      
   }
-  
+  .badge1 {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center; /* Center text within badge */
+  }

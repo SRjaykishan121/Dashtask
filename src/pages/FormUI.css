@@ -1,0 +1,123 @@
+.form-container {
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-title {
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .row .form-control {
+    margin-bottom: 10px;
+    border-radius: 6px;
+  }
+  
+  .btn-primary {
+    background-color: #ff5722;
+    border-color: #ff5722;
+  }
+  
+  h4 {
+    margin-top: 20px;
+    color: #333;
+  }
+  
+  input[type="file"] {
+    border: 2px dashed #ddd;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: #fafafa;
+  }
+  
+  input::placeholder {
+    color: #aaa;
+  }
+ 
+  .upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px; 
+    border: 2px dashed #ddd; /* Example border styling */
+    border-radius: 8px;
+}
+
+.upload img {
+    max-width: 80px; /* Adjust image size if needed */
+    margin-bottom: 10px;
+}
+
+h6, span {
+    text-align: center;
+}
+
+.file-info {
+    font-size: 12px;
+    color: #888; /* Adjust color if needed */
+}
+
+.border-top-only {
+    border: none; /* Remove all borders */
+    border-radius: 12px 12px 0 0; /* Rounded top-left and top-right corners */
+}
+
+.img-font{
+  font-size:12px;
+}
+ .progress {
+  width: 250px;
+  height: 12px;
+  overflow: hidden;
+  background-color: #f5f5f5;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+          box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+}
+.progress-bar {
+  float: left;
+  width: 0;
+  height: 100%;
+  font-size: 12px;
+  line-height: 20px;
+  color: #fff;
+  text-align: center;
+  background-color: #047ce4;
+  -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+          box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .15);
+  -webkit-transition: width .6s ease;
+       -o-transition: width .6s ease;
+          transition: width .6s ease;
+}
+.progress.active .progress-bar,
+.progress-bar.active {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+       -o-animation: progress-bar-stripes 2s linear infinite;
+          animation: progress-bar-stripes 2s linear infinite;
+}
+.progress-bar-success {
+  background-color: #5cb85c;
+}
+.progress-bar-info {
+  background-color: #5bc0de;
+}
+.progress-bar-warning {
+  background-color: #f0ad4e;
+}
+.progress-bar-danger {
+  background-color: #d9534f;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

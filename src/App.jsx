@@ -15,6 +15,8 @@ import MemberList from './pages/MemberList';
 import RequestTracking from './pages/RequestTracking';
 import Complaint from './pages/Complaint';
 import SecurityProtocols from './pages/SecurityProtocols';
+import PersonalDetail from './pages/PersonalDetail';
+import PersonalDetailTenant from './pages/PersonalDetailTenant';
 function App() {
   return (
     <div className="d-flex"> {/* Flexbox container to position sidebar and content side by side */}
@@ -34,6 +36,8 @@ function App() {
           <Route path='/RequestTracking' element={<RequestTracking/>}/>
           <Route path='/Complaint' element={<Complaint/>}/>
           <Route path='/SecurityProtocols' element={<SecurityProtocols/>}/>
+          <Route path='/PersonalDetail' element={<PersonalDetail/>}/>
+          <Route path='/PersonalDetailTenant' element={<PersonalDetailTenant />}/>
         </Routes>
       </div>
     </div>

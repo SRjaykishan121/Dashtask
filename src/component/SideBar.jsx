@@ -81,13 +81,19 @@ const SideBar = () => {
             <li className="p-3">
               <Link to="/Complaint" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
                 <FaBuilding className="me-3" />
-                <span>Resident Complaint</span>
+                <span>@ Resident Complaint</span>
               </Link>
             </li>
             <li className="p-3">
               <Link to="/SecurityProtocols" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
                 <FaBuilding className="me-3" />
-                <span>Resident Security Protocols</span>
+                <span>@ Resident Security Protocols</span>
+              </Link>
+            </li>
+            <li className="p-3">
+              <Link to="/PersonalDetail" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
+                <FaBuilding className="me-3" />
+                <span>@ Resident PersonalDetail</span>
               </Link>
             </li>
           </ul>

@@ -324,7 +324,6 @@ function ComplaintTracking() {
             {/* Create Complaint Modal */}
             {showCreateModal && (
               <>
-              
                 <div className="modal-backdrop show"></div>
                 <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
                   <div className="modal-dialog modal-dialog-centered">
