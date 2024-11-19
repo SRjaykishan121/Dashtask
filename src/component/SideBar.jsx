@@ -78,6 +78,18 @@ const SideBar = () => {
                 <span>Announcement</span>
               </Link>
             </li>
+            <li className="p-3">
+              <Link to="/Complaint" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
+                <FaBuilding className="me-3" />
+                <span>Resident Complaint</span>
+              </Link>
+            </li>
+            <li className="p-3">
+              <Link to="/SecurityProtocols" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
+                <FaBuilding className="me-3" />
+                <span>Resident Security Protocols</span>
+              </Link>
+            </li>
           </ul>
         </div>
         <hr />

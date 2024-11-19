@@ -324,8 +324,9 @@ function ComplaintTracking() {
             {/* Create Complaint Modal */}
             {showCreateModal && (
               <>
+              
                 <div className="modal-backdrop show"></div>
-                <div className="modal d-block" tabIndex="-1">
+                <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
                   <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content" style={{ width: "400px" }}>
                       <div className="modal-header">
@@ -335,61 +336,61 @@ function ComplaintTracking() {
                       <div className="modal-body">
                         <form>
                           <div className="mb-1">
-                            <label htmlFor="complainerName" className="form-label">Complainer Name*</label>
+                            <label htmlFor="complainerName" className="form-label">Complainer Name<span className='text-danger'>*</span> </label>
                             <input type="text" className="form-control" id="complainerName" defaultValue="Evelyn Harper" required />
                           </div>
                           <div className="mb-1">
-                            <label htmlFor="complaintName" className="form-label">Complaint Name*</label>
+                            <label htmlFor="complaintName" className="form-label">Complaint Name<span className='text-danger'>*</span></label>
                             <input type="text" className="form-control" id="complaintName" defaultValue="Unethical Behavior" required />
                           </div>
                           <div className="mb-1">
-                            <label htmlFor="description" className="form-label">Description*</label>
+                            <label htmlFor="description" className="form-label">Description<span className='text-danger'>*</span></label>
                             <textarea className="form-control" id="description" rows="3" defaultValue="The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in Resident." required></textarea>
                           </div>
                           <div className="row">
                             <div className="col">
-                              <label htmlFor="wing" className="form-label">Wing*</label>
+                              <label htmlFor="wing" className="form-label">Wing<span className='text-danger'>*</span></label>
                               <input type="text" className="form-control" id="wing" defaultValue="A" required />
                             </div>
                             <div className="col">
-                              <label htmlFor="unit" className="form-label">Unit*</label>
+                              <label htmlFor="unit" className="form-label">Unit<span className='text-danger'>*</span></label>
                               <input type="text" className="form-control" id="unit" defaultValue="1001" required />
                             </div>
                           </div>
                           <div className="my-1">
-                            <label className="form-label">Priority*</label>
-                            <div className="d-flex gap-2d-flex justify-content-evenly">
-                              <div className="form-check border p-2 rounded  ">
+                          <label className="form-label">Priority<span className='text-danger'>*</span></label>
+                          <div className="d-flex gap-2d-flex justify-content-evenly">
+                            <div className="col-4 form-check border p-2 me-1 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">High</label>
-                              </div>
-                              <div className="form-check  border p-2 rounded ">
+                            </div>
+                            <div className="col-4 form-check  border p-2 me-1 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Medium</label>
-                              </div>
-                              <div className="form-check  border p-2 rounded ">
+                            </div>
+                            <div className="col-4 form-check  border p-2 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Low</label>
-                              </div>
                             </div>
                           </div>
-                          <div className="">
-                            <label className="form-label">Status*</label>
-                            <div className="d-flex gap-2d-flex justify-content-evenly">
-                              <div className="form-check border p-2 rounded  ">
+                        </div>
+                        <div className="">
+                          <label className="form-label">Status<span className='text-danger'>*</span></label>
+                          <div className="d-flex gap-2d-flex justify-content-evenly">
+                            <div className="col-4 form-check border me-1 p-2 rounded text-center ">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Open</label>
-                              </div>
-                              <div className="form-check  border p-2 rounded ">
+                            </div>
+                            <div className="col-4 form-check  border me-1 p-2 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Pending</label>
-                              </div>
-                              <div className="form-check  border p-2 rounded ">
+                            </div>
+                            <div className="col-4 form-check  border p-2 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Solve</label>
-                              </div>
                             </div>
                           </div>
+                        </div>
                         </form>
                       </div>
                       <div className="modal-footer justify-content-between">
@@ -406,7 +407,7 @@ function ComplaintTracking() {
             {showViewModal && (
               <>
                 <div className="modal-backdrop show"></div>
-                <div className="modal d-block" tabIndex="-1">
+                <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
                   <div className="modal-dialog">
                     <div className="modal-content" style={{ width: '400px',marginTop:"200px" }}>
                       <div className="modal-header">
@@ -453,7 +454,7 @@ function ComplaintTracking() {
             {showEditModal && (
               <>
                 <div className="modal-backdrop show"></div>
-                <div className="modal d-block" tabIndex="-1">
+                <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
                   <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content" style={{ width: "400px" }}>
                       <div className="modal-header">
@@ -463,61 +464,61 @@ function ComplaintTracking() {
                       <div className="modal-body">
                         <form>
                           <div className="mb-1">
-                            <label htmlFor="complainerName" className="form-label">Complainer Name*</label>
+                            <label htmlFor="complainerName" className="form-label">Complainer Name<span className='text-danger'>*</span></label>
                             <input type="text" className="form-control" id="complainerName" defaultValue="Evelyn Harper" required />
                           </div>
                           <div className="mb-1">
-                            <label htmlFor="complaintName" className="form-label">Complaint Name*</label>
+                            <label htmlFor="complaintName" className="form-label">Complaint Name<span className='text-danger'>*</span></label>
                             <input type="text" className="form-control" id="complaintName" defaultValue="Unethical Behavior" required />
                           </div>
                           <div className="mb-1">
-                            <label htmlFor="description" className="form-label">Description*</label>
+                            <label htmlFor="description" className="form-label">Description<span className='text-danger'>*</span></label>
                             <textarea className="form-control" id="description" rows="3" defaultValue="The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in Resident." required></textarea>
                           </div>
                           <div className="row">
                             <div className="col">
-                              <label htmlFor="wing" className="form-label">Wing*</label>
+                              <label htmlFor="wing" className="form-label">Wing<span className='text-danger'>*</span></label>
                               <input type="text" className="form-control" id="wing" defaultValue="A" required />
                             </div>
                             <div className="col">
-                              <label htmlFor="unit" className="form-label">Unit*</label>
+                              <label htmlFor="unit" className="form-label">Unit<span className='text-danger'>*</span></label>
                               <input type="text" className="form-control" id="unit" defaultValue="1001" required />
                             </div>
                           </div>
                           <div className="my-1">
-                            <label className="form-label">Priority*</label>
-                            <div className="d-flex gap-2d-flex justify-content-evenly">
-                              <div className="form-check border p-2 rounded  ">
+                          <label className="form-label">Priority<span className='text-danger'>*</span></label>
+                          <div className="d-flex gap-2d-flex justify-content-evenly">
+                            <div className="col-4 form-check border p-2 me-1 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">High</label>
-                              </div>
-                              <div className="form-check  border p-2 rounded ">
+                            </div>
+                            <div className="col-4 form-check  border p-2 me-1 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Medium</label>
-                              </div>
-                              <div className="form-check  border p-2 rounded ">
+                            </div>
+                            <div className="col-4 form-check  border p-2 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Low</label>
-                              </div>
                             </div>
                           </div>
-                          <div className="">
-                            <label className="form-label">Status*</label>
-                            <div className="d-flex gap-2d-flex justify-content-evenly">
-                              <div className="form-check border p-2 rounded  ">
+                        </div>
+                        <div className="">
+                          <label className="form-label">Status<span className='text-danger'>*</span></label>
+                          <div className="d-flex gap-2d-flex justify-content-evenly">
+                            <div className="col-4 form-check border me-1 p-2 rounded text-center ">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Open</label>
-                              </div>
-                              <div className="form-check  border p-2 rounded ">
+                            </div>
+                            <div className="col-4 form-check  border me-1 p-2 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Pending</label>
-                              </div>
-                              <div className="form-check  border p-2 rounded ">
+                            </div>
+                            <div className="col-4 form-check  border p-2 rounded text-center">
                                 <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
                                 <label className='ms-1' htmlFor="Red">Solve</label>
-                              </div>
                             </div>
                           </div>
+                        </div>
                         </form>
                       </div>
                       <div className="modal-footer justify-content-between">
@@ -533,7 +534,7 @@ function ComplaintTracking() {
             {showDeleteModal && (
               <>
                 <div className="modal-backdrop show"></div>
-                <div className="modal d-block" tabIndex="-1">
+                <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
                   <div className="modal-dialog" >
                     <div className="modal-content" style={{marginTop:"200px"}} >
                       <div className="modal-header">

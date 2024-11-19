@@ -13,6 +13,8 @@ import ComplaintTracking from './pages/ComplaintTracking';
 import FinancialManagementIncome from './pages/FinancialManagementIncome';
 import MemberList from './pages/MemberList';
 import RequestTracking from './pages/RequestTracking';
+import Complaint from './pages/Complaint';
+import SecurityProtocols from './pages/SecurityProtocols';
 function App() {
   return (
     <div className="d-flex"> {/* Flexbox container to position sidebar and content side by side */}
@@ -30,6 +32,8 @@ function App() {
           <Route path='/FinancialManagementIncome' element={<FinancialManagementIncome/>}/>
           <Route path='/MemberList' element={<MemberList/>}/>
           <Route path='/RequestTracking' element={<RequestTracking/>}/>
+          <Route path='/Complaint' element={<Complaint/>}/>
+          <Route path='/SecurityProtocols' element={<SecurityProtocols/>}/>
         </Routes>
       </div>
     </div>

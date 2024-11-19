@@ -433,7 +433,7 @@ function MaintenanceDetails() {
                     <div className="position-fixed top-0 start-0 w-100 h-100 bg-dark bg-opacity-50 backdrop-blur"></div>
 
                     {/* Modal Content */}
-                    <div className="modal fade show d-block" tabIndex="-1" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+                    <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
                         <div className="modal-dialog modal-dialog-centered" role="document">
                             <div className="modal-content" style={{maxWidth:"400px"}}>
                                 <div className="modal-header">
@@ -633,25 +633,25 @@ const OtherIncome = () => {
                                     {modalType === "create" && (
                                         <>
                                             <div className="form-group mb-1">
-                                                <label>Title*</label>
+                                                <label>Title<span className='text-danger'>*</span></label>
                                                 <input type="text" className="form-control" placeholder="Enter title" />
                                             </div>
                                             <div className="form-row d-flex">
                                                 <div className="form-group col-5 mb-1 me-4">
-                                                    <label>Date*</label>
+                                                    <label>Date<span className='text-danger'>*</span></label>
                                                     <input type="date" className="form-control" />
                                                 </div>
                                                 <div className="form-group col-5 mb-1">
-                                                    <label>Due Date*</label>
+                                                    <label>Due Date<span className='text-danger'>*</span></label>
                                                     <input type="date" className="form-control" />
                                                 </div>
                                             </div>
                                             <div className="form-group mb-1">
-                                                <label>Description*</label>
+                                                <label>Description<span className='text-danger'>*</span></label>
                                                 <textarea className="form-control" rows="3" placeholder="Enter description"></textarea>
                                             </div>
                                             <div className="form-group mb-1">
-                                                <label>Amount*</label>
+                                                <label>Amount<span className='text-danger'>*</span></label>
                                                 <input type="text" className="form-control" placeholder="Enter amount" />
                                             </div>
                                         </>
@@ -659,21 +659,21 @@ const OtherIncome = () => {
                                     {modalType === "edit" && currentNote && (
                                         <>
                                             <div className="form-group mb-1">
-                                                <label>Amount*</label>
+                                                <label>Amount<span className='text-danger'>*</span></label>
                                                 <input type="text" className="form-control" placeholder="₹ 1,500" value={currentNote.amount || ''} />
                                             </div>
                                             <div className="form-row d-flex">
                                                 <div className="form-group col-5 mb-1 me-4">
-                                                    <label>Date*</label>
+                                                    <label>Date<span className='text-danger'>*</span></label>
                                                     <input type="date" className="form-control" defaultValue={currentNote.Date} />
                                                 </div>
                                                 <div className="form-group col-5 mb-1">
-                                                    <label>Due Date*</label>
+                                                    <label>Due Date<span className='text-danger'>*</span></label>
                                                     <input type="date" className="form-control" defaultValue="10/07/2024" />
                                                 </div>
                                             </div>
                                             <div className="form-group mb-1">
-                                                <label>Description*</label>
+                                                <label>Description<span className='text-danger'>*</span></label>
                                                 <textarea className="form-control" rows="3" placeholder="Enter description" defaultValue={currentNote.description}></textarea>
                                             </div>
                                         </>

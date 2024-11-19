@@ -1,0 +1,43 @@
+
+.complainer {
+    display: flex;
+    align-items: center;
+   /* Space between image and text */
+  }
+  
+ 
+  /* Badge Styles */
+  .badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #ffffff;
+    text-align: center; /* Center text within badge */
+  }
+  
+  /* Status Colors */
+  .status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    text-align: center; /* Center text within status */
+  }
+  
+  .status.open {
+    background-color: #f0f4ff; /* Light blue background */
+    color: #6c83f7;
+  }
+  
+  .btn-primary{
+    background: linear-gradient(90deg, #FE512E 0%, #F09619 100%);
+    border: 1px solid rgb(255, 255, 255);
+  }
+  .rounded-table1 thead th:first-child {
+    border-top-left-radius: 12px;
+  }
+  
+  .rounded-table1 thead th:last-child {
+    border-top-right-radius: 12px;
+  }
