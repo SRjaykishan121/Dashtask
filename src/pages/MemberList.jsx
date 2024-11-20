@@ -96,8 +96,8 @@ function MemberList() {
     ];
   return (
     <div className="container">
-            <div className="bg-white rounded  p-3 shadow-sm">
-                <h6 className="mb-3">Ganesh Chaturthi Participator Member List</h6>
+            <div className="bg-white rounded bg-light  p-3 shadow-sm">
+                <h6 className="mb-3" style={{fontSize:"20px"}}>Ganesh Chaturthi Participator Member List</h6>
                 <div className="table-responsive mt-2" style={{ maxHeight: '400px', overflowY: 'auto' }}>
                     <table className="table rounded-table">
                         <thead className="bg-light">
@@ -119,7 +119,7 @@ function MemberList() {
                                     </td>
                                     <td>{item.date}</td>
                                     <td>
-                                        <span className={`badge ${item.status === 'Owner' ? 'Owner' : 'Tenant'}`} style={{ fontSize: "14px" }}>
+                                        <span className={`badge1 ${item.status === 'Owner' ? 'Owner' : 'Tenant'}`} style={{ fontSize: "14px" }}>
                                             <FaUser className="mb-1" />
                                             {item.status}
                                         </span>
@@ -127,7 +127,7 @@ function MemberList() {
                                     <td style={{ fontSize: "14px" }}>{item.phoneNumber}</td>
                                     <td className="text-success" style={{ fontSize: "14px" }}>{item.amount}</td>
                                     <td>
-                                        <span className={`badge ${item.paymentMethod === 'Cash' ? 'Cash' : 'Online'}`} style={{ fontSize: "14px" }}>
+                                        <span className={`badge1 ${item.paymentMethod === 'Cash' ? 'Cash' : 'Online'}`} style={{ fontSize: "14px" }}>
                                             <MdPayment className="mb-1" />
                                             {item.paymentMethod}
                                         </span>
