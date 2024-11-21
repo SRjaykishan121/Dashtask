@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './FinancialManagementIncome.css';
 import { Link } from 'react-router-dom';
-
+import { FaUser } from "react-icons/fa6";
 import { FaEye, FaCalendarAlt } from "react-icons/fa";
-
-
+import { MdPayment } from "react-icons/md";
+import { FiX } from 'react-icons/fi';
 function FinancialManagementIncome() {
     const [activeTab, setActiveTab] = useState("maintenance");
     const [showMainModal, setShowMainModal] = useState(false);
@@ -193,9 +193,6 @@ function FinancialManagementIncome() {
                                             value={dueDate}
                                             onChange={(e) => setDueDate(e.target.value)}
                                         />
-                                        <span className="input-group-text">
-                                            <FaCalendarAlt />
-                                        </span>
                                     </div>
                                 </div>
                                 <div className="mb-3">
@@ -220,21 +217,19 @@ function FinancialManagementIncome() {
                             <div className="modal-footer">
                                 <button
                                     type="button"
+                                    style={{ width: "48%" }}
                                     className="btn btn-outline-secondary"
                                     onClick={() => setShowAddMaintenanceModal(false)}
                                 >
                                     Cancel
                                 </button>
-                                <button
-                                    type="button"
-                                    className="btn"
+                                <button type="button" className="btn"
                                     style={{
-                                        background: "linear-gradient(90deg, #FF5722, #FF9800)",
-                                        color: "white",
+                                        background: "linear-gradient(90deg, #FF5722, #FF9800)", color: "white", width: "48%"
                                     }}
                                     onClick={handleSaveMaintenance}
                                 >
-                                    Save
+                                    Apply
                                 </button>
                             </div>
                         </div>
@@ -304,112 +299,201 @@ function MaintenanceDetails({ data }) { // Accept data as prop
     return (
         <div className="container-fluid mt-4">
             <div className="row pt-3">
-                <div
-                    className="table-responsive"
-                    style={{ maxHeight: "300px", overflowY: "auto" }}
-                >
-                    <table className="table table-bordered align-middle text-center">
-                        <thead className="table-light">
-                            <tr>
-                                <th>Name</th>
-                                <th>Unit Number</th>
-                                <th>Date</th>
-                                <th>Phone Number</th>
-                                <th>Amount</th>
-                                <th>Penalty</th>
-                                <th>Status</th>
-                                <th>Payment</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {data.map((item, index) => (
-                                <tr key={index}>
-                                    <td className="d-flex align-items-center">
-                                        <img
-                                            src="src\Images\image.png"
-                                            alt="Avatar"
-                                            className="rounded-circle me-2"
-                                            style={{ width: "35px", height: "35px" }}
-                                        />
-                                        {item.name}
-                                    </td>
-                                    <td>{item.unitNumber}</td>
-                                    <td>{item.date}</td>
-                                    <td>{item.phoneNumber}</td>
-                                    <td style={{ color: "green" }}>{item.amount}</td>
-                                    <td
-                                        style={{
-                                            color: item.penalty === "--" ? "inherit" : "red",
-                                        }}
-                                    >
-                                        {item.penalty}
-                                    </td>
-                                    <td>
-                                        <span
-                                            className={`badge ${item.paymentStatus === "Pending"
-                                                    ? "bg-warning text-dark"
-                                                    : "bg-success"
-                                                }`}
-                                        >
-                                            {item.paymentStatus}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <span
-                                            className={`badge ${item.paymentMethod === "Online"
-                                                    ? "bg-primary"
-                                                    : "bg-secondary"
-                                                }`}
-                                        >
-                                            {item.paymentMethod}
-                                        </span>
-                                    </td>
-                                    <td>
-                                        <button
-                                            className="btn btn-link text-primary"
-                                            onClick={() => handleViewClick(item)}
-                                        >
-                                            <FaEye />
-                                        </button>
-                                    </td>
+                <div className="complaint-list ">
+                    <div
+                        className="table-responsive  bg-white"
+                        style={{ maxHeight: "300px", overflowY: "auto", border: "1px solid #ddd", borderRadius: "8px" }}
+                    >
+                        <table className="table align-middle text-center">
+                            <thead>
+                                <tr style={{ backgroundColor: "#F3F4F6" }}>
+                                    <th style={{ backgroundColor: "#a3b4ec", }}>Name</th>
+                                    <th style={{ backgroundColor: "#a3b4ec", }}>Unit Number</th>
+                                    <th style={{ backgroundColor: "#a3b4ec", }}>Date</th>
+                                    <th style={{ backgroundColor: "#a3b4ec", }}>Status</th>
+                                    <th style={{ backgroundColor: "#a3b4ec", }}>Phone Number</th>
+                                    <th style={{ backgroundColor: "#a3b4ec", }}>Amount</th>
+                                    <th style={{ backgroundColor: "#a3b4ec", }}>Penalty</th>
+                                    <th style={{ backgroundColor: "#a3b4ec", }}>Status</th>
+                                    <th style={{ backgroundColor: "#a3b4ec", }}>Payment</th>
+                                    <th style={{ backgroundColor: "#a3b4ec", }}>Action</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {data.map((item, index) => (
+                                    <tr key={index}>
+                                        <td className="complainer d-flex align-items-center">
+                                            <img
+                                                src="src/Images/image.png"
+                                                alt="Complainer"
+                                                className="rounded-circle me-2"
+                                                style={{ width: "35px", height: "35px", objectFit: "cover" }}
+                                            />
+                                            {item.name}
+                                        </td>
+                                        <td>
+                                            <span className="status open" style={{ fontSize: "14px" }}>A</span>
+                                            <span className="badge rounded-circle bg-primary text-white" style={{ padding: "10px" }}>
+                                                {item.unitLetter}
+                                            </span>
+                                            <span className="ms-2">{item.unitNumber}</span>
+                                        </td>
+                                        <td>{item.date}</td>
+                                        <td>
+                                            <span className={`badge1 ${item.status === "Owner1" ? "Owner1" : "Tenant"} `}
+                                                style={{ fontSize: "14px" }}> <FaUser className="mb-1" /> {item.status}
+                                            </span>
+                                        </td>
+                                        <td>{item.phoneNumber}</td>
+                                        <td style={{ color: "green", }}> {item.amount}</td>
+                                        <td style={{ color: item.penalty !== "--" ? "red" : "black" }}>
+                                            {item.penalty === "--" ? "--" : ` ${item.penalty}`}
+                                        </td>
+                                        <td>
+                                            <span className={`badge1 ${item.paymentStatus === "Pending" ? "Pending" : "Done"}`}
+                                                style={{ fontSize: "14px" }}> {item.paymentStatus}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span  className={`badge1 ${item.paymentMethod === "Cash" ? "Cash" : "Online"}`}
+                                                 style={{ fontSize: "14px" }}  > <MdPayment className="mb-1" /> {item.paymentMethod}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <button className="btn-action">
+                                                <img src="src/Images/view.png" alt="View" onClick={() => handleViewClick(item)} />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
+
             {/* Modal */}
             {showModal && selectedData && (
-                <div
-                    className="modal d-block"
-                    style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-                >
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                            <div className="modal-header">
-                                <h5 className="modal-title">Maintenance Detail</h5>
-                                <button
-                                    type="button"
-                                    className="btn-close"
-                                    onClick={() => setShowModal(false)}
-                                ></button>
-                            </div>
-                            <div className="modal-body text-center">
-                                <img
-                                    src="src/Images/image.png"
-                                    alt="Maintenance"
-                                    className="img-fluid mb-3"
-                                />
-                                <h6>Details for Unit: {selectedData.unitNumber}</h6>
-                                <p>Name: {selectedData.name}</p>
-                                <p>Amount: {selectedData.amount}</p>
-                                <p>Status: {selectedData.paymentStatus}</p>
+                <>
+                    <div className={`modal fade ${showModal ? "show d-block" : "d-none"}`} tabIndex="-1"
+                        style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }} role="dialog">
+                        <div className="modal-dialog modal-dialog-centered" style={{ maxWidth: "500px" }} role="document" >
+                            <div className="modal-content" style={{ borderRadius: "10px" }}>
+                                {/* Modal Header */}
+                                <div className="modal-header">
+                                    <h5 className="modal-title" style={{ fontWeight: "bold" }}>
+                                        View Maintenance Details
+                                    </h5>
+                                    <button type="button" className="btn-close" aria-label="Close" onClick={() => setShowModal(false)}><FiX size={24} /> </button>
+                                </div>
+                                {/* Modal Body */}
+                                <div className="modal-body">
+                                    <div className="d-flex align-items-center mb-3">
+                                        <img src="src\Images\image.png" alt="User" className="rounded-circle me-3"
+                                            style={{ width: "50px", height: "50px",objectFit: "cover",}}/>
+                                        <div>
+                                            <h6 style={{ fontWeight: "bold", margin: 0 }}>
+                                                {selectedData.name}
+                                            </h6>
+                                            <p style={{ margin: 0,  color: "#777",   fontSize: "14px", }}>
+                                                {selectedData.date}
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    {/* Row of Four Columns */}
+                                    <div className="row">
+                                        <div className="col-3 mb-2">
+                                            <p className="mb-1 text-secondary">Wing</p>
+                                            <span  className="status open" style={{ fontSize: "14px" }}  >A
+                                                {selectedData.wing}
+                                            </span>
+                                        </div>
+                                        <div className="col-3 mb-2">
+                                            <p className="mb-1 text-secondary">Unit</p>
+                                            <span>{selectedData.unitNumber}</span>
+                                        </div>
+                                        <div className="col-3 mb-2">
+                                            <p className="mb-1 text-secondary">Status</p>
+                                            <span
+                                                className={`badge1 ${selectedData.status === "Owner1" ? "Owner1" : "Tenant" }`}
+                                                style={{ fontSize: "14px" }} >
+                                                   <FaUser className="mb-1" />
+                                                {selectedData.status}
+                                            </span>
+                                        </div>
+                                        <div className="col-3 mb-2">
+                                            <p className="mb-1 text-secondary">Amount</p>
+                                            <span style={{
+                                                    color: "green",
+                                                    fontWeight: "bold",
+                                                }}
+                                            >
+                                                {selectedData.amount}
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    {/* Second Row of Four Columns */}
+                                    <div className="row">
+                                        <div className="col-3 mb-2">
+                                            <p className="mb-1 text-secondary">Penalty</p>
+                                            <span
+                                                style={{
+                                                    color: selectedData.penalty === "--" ? "#777" : "red",
+                                                }}
+                                            >
+                                                {selectedData.penalty}
+                                            </span>
+                                        </div>
+
+                                        <div className="col-3 mb-2">
+                                            <p className="mb-1 text-secondary">Payment Status</p>
+                                            <span
+                                                className={`badge1 ${selectedData.paymentStatus === "Pending"
+                                                        ? "Pending"
+                                                        : "Done"
+                                                    }`}
+                                                style={{ fontSize: "14px" }}
+                                            >
+                                                {selectedData.paymentStatus}
+                                            </span>
+                                        </div>
+
+                                        <div className="col-3 mb-2">
+                                            <p className="mb-1 text-secondary">Payment</p>
+                                            <span
+                                                className={`badge1 ${selectedData.paymentMethod === "Cash"
+                                                        ? "Cash"
+                                                        : "Online"
+                                                    }`}
+                                                style={{
+                                                    padding: "5px 10px",
+                                                }}
+                                            >
+                                                {selectedData.paymentMethod}
+                                            </span>
+                                        </div>
+                                        <div className="col-3 mb-2">
+                                            <p className="mb-1 text-secondary">Other Info</p>
+                                            <span
+                                                style={{
+                                                    color: "#333",
+                                                }}
+                                            >
+                                                --
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </>
+
+
+
             )}
         </div>
     );
@@ -462,32 +546,32 @@ const OtherIncome = () => {
     // Handle form submission
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         // Check if any required field is empty
         if (
-            !formValues.title.trim() || 
-            !formValues.description.trim() || 
-            !formValues.Date || 
-            !formValues.dueDate || 
+            !formValues.title.trim() ||
+            !formValues.description.trim() ||
+            !formValues.Date ||
+            !formValues.dueDate ||
             !formValues.amount.trim()
         ) {
             alert("Please fill in all fields."); // Notify the user
             return; // Exit the function
         }
-    
+
         if (modalType === "create") {
             setNotes([...notes, formValues]); // Add new note
         } else if (modalType === "edit") {
             // Update the existing note
             setNotes(notes.map((note) => (note === currentNote ? formValues : note)));
         }
-    
+
         // Close the modal and reset the form
         setShowModal(false);
         setFormValues({ title: "", description: "", Date: "", dueDate: "", amount: "" });
         setModalType("");
     };
-    
+
 
     // Opens the Create Note modal
     const handleCreateClick = () => {
@@ -574,27 +658,29 @@ const OtherIncome = () => {
                                 )}
                             </div>
                             <div className="card-body ">
-                               <div className="d-flex justify-content-between mb-2">
-                               <span className="text-muted" style={{ fontSize: "12px" }}> Amount: </span>
-                               <span className='badge  text-primary' style={{  fontSize: "12px",
-                                padding: "5px 10px",
-                                borderRadius: "20px",
-                                fontWeight: "bold", backgroundColor:"#ecf4ff" }}>₹ {note.amount} </span>
-                               </div>
-                               <div className="d-flex justify-content-between mb-2">
-                               <span className="text-muted" style={{ fontSize: "12px" }}> Date: </span>
-                               <span style={{ fontSize: "12px", fontWeight: "bold", }}> {note.Date} </span>
-                               </div>
-                               <div className=" d-flex justify-content-between mb-2">
-                               <span className="text-muted" style={{ fontSize: "12px" }}>Due Date: </span>
-                               <span style={{ fontSize: "12px", fontWeight: "bold", }}> {note.dueDate} </span>
-                               </div>
-                               <div>
-                        <h6 className="text-muted mb-1" style={{ fontSize: "12px" }}  >
-                            Description
-                        </h6>
-                        <p className="text-normal mb-0" style={{ fontSize: "12px" }}>{note.description} </p>
-                    </div>
+                                <div className="d-flex justify-content-between mb-2">
+                                    <span className="text-muted" style={{ fontSize: "12px" }}> Amount: </span>
+                                    <span className='badge  text-primary' style={{
+                                        fontSize: "12px",
+                                        padding: "5px 10px",
+                                        borderRadius: "20px",
+                                        fontWeight: "bold", backgroundColor: "#ecf4ff"
+                                    }}>₹ {note.amount} </span>
+                                </div>
+                                <div className="d-flex justify-content-between mb-2">
+                                    <span className="text-muted" style={{ fontSize: "12px" }}> Date: </span>
+                                    <span style={{ fontSize: "12px", fontWeight: "bold", }}> {note.Date} </span>
+                                </div>
+                                <div className=" d-flex justify-content-between mb-2">
+                                    <span className="text-muted" style={{ fontSize: "12px" }}>Due Date: </span>
+                                    <span style={{ fontSize: "12px", fontWeight: "bold", }}> {note.dueDate} </span>
+                                </div>
+                                <div>
+                                    <h6 className="text-muted mb-1" style={{ fontSize: "12px" }}  >
+                                        Description
+                                    </h6>
+                                    <p className="text-normal mb-0" style={{ fontSize: "12px" }}>{note.description} </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -608,7 +694,7 @@ const OtherIncome = () => {
                         <div className="modal-content">
                             <div className="modal-header">
                                 <h5 className="modal-title">
-                                    {modalType === "create" ? "Create Note" : `Edit ${currentNote?.title}`}
+                                    {modalType === "create" ? "Create Other Income" : `Edit ${currentNote?.title}`}
                                 </h5>
                                 <button type="button" className="btn-close" onClick={handleCloseEditModal}></button>
                             </div>
@@ -616,60 +702,40 @@ const OtherIncome = () => {
                                 <form onSubmit={handleSubmit}>
                                     {/* Form Fields */}
                                     <div className="form-group mb-2">
-                                        <label>Title</label>
-                                        <input
-                                            type="text"
-                                            name="title"
-                                            className="form-control"
-                                            value={formValues.title}
+                                        <label>Title<span className='text-danger'>*</span></label>
+                                        <input type="text" name="title" className="form-control" value={formValues.title} onChange={handleInputChange} />
+                                    </div>
+                                    <div className="form-row d-flex">
+                                        <div className="form-group col-5 mb-1 me-4">
+                                            <label>Date<span className='text-danger'>*</span></label>
+                                            <input type="date" className="form-control" name="Date" value={formValues.Date}
+                                                onChange={handleInputChange} />
+                                        </div>
+                                        <div className="form-group col-5 mb-1">
+                                            <label>Due Date<span className='text-danger'>*</span></label>
+                                            <input type="date" className="form-control" name="dueDate" value={formValues.dueDate}
+                                                onChange={handleInputChange} />
+                                        </div>
+                                    </div>
+                                    <div className="form-group mb-2">
+                                        <label>Description<span className='text-danger'>*</span></label>
+                                        <textarea name="description" className="form-control" value={formValues.description}
+                                            onChange={handleInputChange} ></textarea>
+                                    </div>
+                                    <div className="form-group mb-2">
+                                        <label>Amount<span className='text-danger'>*</span></label>
+                                        <input type="text" name="amount" className="form-control" value={formValues.amount}
                                             onChange={handleInputChange}
                                         />
                                     </div>
-                                    <div className="form-group mb-2">
-                                        <label>Date</label>
-                                        <input
-                                            type="date"
-                                            name="Date"
-                                            className="form-control"
-                                            value={formValues.Date}
-                                            onChange={handleInputChange}
-                                        />
+                                    <div className="modal-footer">
+                                        <button type="button" className="btn btn-secondary" onClick={() => setShowModal(false)} style={{ width: "48%" }} >
+                                            Cancel
+                                        </button>
+                                        <button type="submit" className="btn btn-primary" style={{ width: "48%" }}>
+                                            Save
+                                        </button>
                                     </div>
-                                    <div className="form-group mb-2">
-                                        <label>Due Date</label>
-                                        <input
-                                            type="date"
-                                            name="dueDate"
-                                            className="form-control"
-                                            value={formValues.dueDate}
-                                            onChange={handleInputChange}
-                                        />
-                                    </div>
-                                    <div className="form-group mb-2">
-                                        <label>Description</label>
-                                        <textarea
-                                            name="description"
-                                            className="form-control"
-                                            value={formValues.description}
-                                            onChange={handleInputChange}
-                                        ></textarea>
-                                    </div>
-                                    <div className="form-group mb-2">
-                                        <label>Amount</label>
-                                        <input
-                                            type="text"
-                                            name="amount"
-                                            className="form-control"
-                                            value={formValues.amount}
-                                            onChange={handleInputChange}
-                                        />
-                                    </div>
-                                    <button type="submit" className="btn btn-primary">
-                                        Save
-                                    </button>
-                                    <button type="button" onClick={() => setShowModal(false)} className="btn btn-primary">
-                                        cansel
-                                    </button>
                                 </form>
                             </div>
                         </div>
@@ -679,31 +745,47 @@ const OtherIncome = () => {
 
             {/* Delete Modal */}
             {showDeleteModal && (
-                <div className="modal fade show d-block" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
-                    <div className="modal-dialog modal-dialog-centered">
-                        <div className="modal-content">
-                            <div className="modal-body text-center">
-                                <h5>Delete {currentNote?.title}?</h5>
-                                <p>Are you sure you want to delete this note?</p>
-                                <button
-                                    type="button"
-                                    className="btn btn-danger me-2"
-                                    onClick={handleConfirmDelete}
-                                >
-                                    Confirm
-                                </button>
-                                <button
-                                    type="button"
-                                    className="btn btn-secondary"
-                                    onClick={handleCloseDeleteModal}
-                                >
-                                    Cancel
-                                </button>
+                <div>
+                    {/* Modal Backdrop */}
+                    <div className="modal-backdrop show"></div>
+
+                    {/* Modal Dialog */}
+                    <div
+                        className="modal fade show d-block"
+                        tabIndex="-1"
+                        role="dialog"
+                        style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                    >
+                        <div className="modal-dialog">
+                            <div
+                                className="modal-content"
+                                style={{ width: "400px", marginTop: "200px" }}
+                            >
+                                {/* Modal Header */}
+                                <div className="modal-header">
+                                    <h5 className="modal-title">Delete Number?</h5>
+                                    <button type="button" className="btn-close" onClick={handleCloseDeleteModal} ></button>
+                                </div>
+
+                                {/* Modal Body */}
+                                <div className="modal-body">
+                                    <p>Are you sure you want to delete this number?</p>
+                                </div>
+
+                                {/* Modal Footer */}
+                                <div className="modal-footer d-flex justify-content-between">
+                                    <button type="button" className="btn btn-outline-secondary" style={{ width: "45%" }}
+                                        onClick={handleCloseDeleteModal} > Cancel
+                                    </button>
+                                    <button type="button" className="btn btn-danger" style={{ width: "45%" }} onClick={handleConfirmDelete}>  Delete
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             )}
+
         </div>
     );
 };
