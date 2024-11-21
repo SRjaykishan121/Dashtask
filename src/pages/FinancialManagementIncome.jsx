@@ -425,7 +425,8 @@ function MaintenanceDetails({ data }) { // Accept data as prop
                                         </div>
                                         <div className="col-3 mb-2">
                                             <p className="mb-1 text-secondary">Amount</p>
-                                            <span style={{
+                                            <span
+                                                style={{
                                                     color: "green",
                                                     fontWeight: "bold",
                                                 }}
@@ -491,9 +492,6 @@ function MaintenanceDetails({ data }) { // Accept data as prop
                         </div>
                     </div>
                 </>
-
-
-
             )}
         </div>
     );
