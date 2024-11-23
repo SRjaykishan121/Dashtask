@@ -4,16 +4,14 @@ import './Complaint.css';
 
 function Complaint() {
     const [activeTab, setActiveTab] = useState('Complaint');
-    
 
     const handleTabClick = (tab) => {
         setActiveTab(tab);
     };
-    
 
     return (
         <div className="container-fluid p-4" style={{ backgroundColor: '#F4F6F8' }}>
-           
+
             {/* Tabs Section */}
             <div className="container mt-3">
                 <ul className="nav nav-tabs border-0">
@@ -45,9 +43,8 @@ function Complaint() {
                                 border: 'none',
                                 padding: '10px 20px'
                             }}
-                        >
-                            Request Submission    
-                       </button>
+                        >  Request Submission
+                        </button>
                     </li>
                 </ul>
 
@@ -61,165 +58,255 @@ function Complaint() {
     );
 }
 
+
+
 const ComplaintSubmission = () => {
-    const notes = [
-        {
-            title: "Unethical Behavior",
-            description: "Regular waste collection services.",
-            Date: "01/07/2024",
-        },
-        {
-            title: "Preventive Measures",
-            description: "Expenses will way sense for you.",
-            Date: "01/07/2024",
-        },
-        {
-            title: "Unethical Behavior",
-            description: "Providing information deliberately.",
-            Date: "01/07/2024",
-        },
-        {
-            title: "Preventive Measures",
-            description: "Regular waste collection services.",
-            Date: "01/07/2024",
-        },
-        {
-            title: "Unethical Behavior",
-            description: "Regular waste collection services.",
-            Date: "01/07/2024",
-        },
-        {
-            title: "Preventive Measures",
-            description: "Regular waste collection services.",
-            Date: "01/07/2024",
-        },
-    ];
+    const [showModal, setShowModal] = useState(false);
+    const [complaints, setComplaints] = useState([]);
+    const [formData, setFormData] = useState({
+        title: "",
+        requestDate: "",
+        description: "",
+        status: "Open",
+    });
 
     const [dropdownIndex, setDropdownIndex] = useState(null);
-    const [showCreateModal, setShowCreateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [selectedNote, setSelectedNote] = useState(null);
+    const [selectedComplaint, setSelectedComplaint] = useState(null);
 
-    const toggleDropdown = (index) => {
-        setDropdownIndex(dropdownIndex === index ? null : index);
+    // Handle form input changes
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
-    const handleShowCreateModal = () => setShowCreateModal(true);
-    const handleCloseCreateModal = () => setShowCreateModal(false);
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setComplaints([...complaints, { ...formData, id: Date.now() }]);
+        setFormData({ title: "", requestDate: "", description: "", status: "Open" });
+        setShowModal(false);
+    };
 
-    const handleDeleteClick = (note) => {
-        setSelectedNote(note);
+    // Handle dropdown toggle
+    const toggleDropdown = (id) => {
+        setDropdownIndex(dropdownIndex === id ? null : id);
+    };
+
+    // Show delete modal
+    const handleDeleteClick = (complaint) => {
+        setSelectedComplaint(complaint);
         setShowDeleteModal(true);
     };
 
-    const handleCloseDeleteModal = () => {
+    // Confirm delete action
+    const handleConfirmDelete = () => {
+        setComplaints(complaints.filter((c) => c.id !== selectedComplaint.id));
         setShowDeleteModal(false);
-        setSelectedNote(null);
+        setSelectedComplaint(null);
     };
 
-    const handleConfirmDelete = () => {
-        console.log("Deleting:", selectedNote);
-        handleCloseDeleteModal();
+    // Close delete modal
+    const handleCloseDeleteModal = () => {
+        setShowDeleteModal(false);
+        setSelectedComplaint(null);
     };
 
     return (
         <div className="container-fluid pt-3 mt-3">
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <h2 style={{ fontSize: "20px" }}>Complaint</h2>
-                <button className="btn btn-primary" onClick={handleShowCreateModal}>
+                <button className="btn btn-primary" onClick={() => setShowModal(true)}>
                     Create Complaint
                 </button>
             </div>
+
+            {/* Complaint Cards */}
             <div className="row">
-                {notes.map((note, index) => (
-                    <NoteCard
-                        key={index}
-                        note={note}
-                        isOpen={dropdownIndex === index}
-                        onToggleDropdown={() => toggleDropdown(index)}
-                        onDeleteClick={() => handleDeleteClick(note)}
-                    />
+                {complaints.map((complaint) => (
+                    <div className="col-md-3 mb-3" key={complaint.id}>
+                        <div className="card shadow-sm border-0 note-card bg-white">
+                            <div
+                                className="d-flex justify-content-between align-items-center p-2 rounded-top"
+                                style={{ backgroundColor: "#5678e9", color: "#fff" }} >
+                                <h5 className="card-title mb-0" style={{ fontSize: "14px" }}>
+                                    {complaint.title}
+                                </h5>
+                                <img
+                                    src="src/Images/menu.png"
+                                    role="button"
+                                    tabIndex="0"
+                                    alt="Menu"
+                                    style={{ width: "20px", height: "20px", cursor: "pointer" }}
+                                    onClick={() => toggleDropdown(complaint.id)}
+                                />
+                                {dropdownIndex === complaint.id && (
+                                    <div className="dropdown-menu show"
+                                        style={{
+                                            position: "absolute", top: "40px", right: "10px",
+                                            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                                        }}>
+                                        <button className="dropdown-item"
+                                            onClick={() => handleDeleteClick(complaint)}  > Delete
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="card-body">
+                                {/* Request Date */}
+                                <div className="d-flex justify-content-between mb-2">
+                                    <span className="text-muted" style={{ fontSize: "12px" }}>
+                                        Request Date
+                                    </span>
+                                    <span
+                                        style={{ fontSize: "12px", fontWeight: "bold", }} >
+                                            {complaint.requestDate}
+                                    </span>
+                                </div>
+
+                                {/* Status */}
+                                <div className="d-flex justify-content-between mb-2">
+                                    <span className="text-muted" style={{ fontSize: "12px" }}>
+                                        Status
+                                    </span>{" "}
+                                    <span
+                                        className={`badge1 ${complaint.status === "Open"
+                                            ? "open"
+                                            : complaint.status === "Pending"
+                                                ? "pending"
+                                                : "solve"
+                                            }`}
+                                    >
+                                        {complaint.status}
+                                    </span>
+                                </div>
+
+                                {/* Description */}
+                                <div>
+                                    <h6 className="text-muted mb-1" style={{ fontSize: "12px" }}  >
+                                        Description
+                                    </h6>
+                                    <p className="text-normal mb-0" style={{ fontSize: "12px" }}>{complaint.description} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ))}
             </div>
-             {/* Create Complaint Modal */}
-             {showCreateModal && (
-              <>
-                <div className="modal-backdrop show"></div>
-                <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
-                  <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content" style={{ width: "400px" }}>
-                      <div className="modal-header">
-                        <h5 className="modal-title">Create Complaint</h5>
-                        <button type="button" className="btn-close" onClick={handleCloseCreateModal}></button>
-                      </div>
-                      <div className="modal-body">
-                        <form>
-                          <div className="mb-1">
-                            <label htmlFor="complainerName" className="form-label">Complainer Name <span className='text-danger'>*</span></label>
-                            <input type="text" className="form-control" id="complainerName" defaultValue="Evelyn Harper" required />
-                          </div>
-                          <div className="mb-1">
-                            <label htmlFor="complaintName" className="form-label">Complaint Name<span className='text-danger'>*</span></label>
-                            <input type="text" className="form-control" id="complaintName" defaultValue="Unethical Behavior" required />
-                          </div>
-                          <div className="mb-1">
-                            <label htmlFor="description" className="form-label">Description<span className='text-danger'>*</span></label>
-                            <textarea className="form-control" id="description" rows="3" defaultValue="The celebration of Ganesh Chaturthi involves the installation of clay idols of Ganesa in Resident." required></textarea>
-                          </div>
-                          <div className="row">
-                            <div className="col">
-                              <label htmlFor="wing" className="form-label">Wing<span className='text-danger'>*</span></label>
-                              <input type="text" className="form-control" id="wing" defaultValue="A" required />
+
+            {/* Create Complaint Modal */}
+            {showModal && (
+                <>
+                    <div className="modal-backdrop show"></div>
+                    <div
+                        className="modal fade show d-block"
+                        tabIndex="-1"
+                        role="dialog"
+                        style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                    >
+                        <div className="modal-dialog modal-dialog-centered">
+                            <div className="modal-content" style={{ maxWidth: "400px" }}>
+                                <div className="modal-header">
+                                    <h5 className="modal-title">Create Complaint</h5>
+                                    <button
+                                        type="button"
+                                        className="btn-close"
+                                        onClick={() => setShowModal(false)}
+                                    ></button>
+                                </div>
+                                <div className="modal-body">
+                                    <form onSubmit={handleSubmit}>
+                                        {/* Title */}
+                                        <div className="mb-3">
+                                            <label htmlFor="title" className="form-label">
+                                                Title<span className="text-danger">*</span>
+                                            </label>
+                                            <input type="text" className="form-control" id="title" name="title" value={formData.title}
+                                                onChange={handleChange} required />
+                                        </div>
+
+                                        {/* Request Date */}
+                                        <div className="mb-3">
+                                            <label htmlFor="requestDate" className="form-label">
+                                                Request Date<span className="text-danger">*</span>
+                                            </label>
+                                            <input type="date" className="form-control" id="requestDate" name="requestDate"
+                                                value={formData.requestDate} onChange={handleChange} required/>
+                                        </div>
+
+                                        {/* Description */}
+                                        <div className="mb-3">
+                                            <label htmlFor="description" className="form-label">
+                                                Description<span className="text-danger">*</span>
+                                            </label>
+                                            <textarea className="form-control"
+                                                id="description"
+                                                name="description"
+                                                rows="3"
+                                                value={formData.description}
+                                                onChange={handleChange}
+                                                required
+                                            ></textarea>
+                                        </div>
+                                        {/* Status */}
+                                        <div className="mb-3">
+                                            <label className="form-label">Status</label>
+                                            <div className="d-flex gap-2d-flex justify-content-evenly">
+                                                <div className="col-4 form-check border p-2 me-1 rounded text-center">
+                                                    <input
+                                                        type="radio"
+                                                        id="statusOpen"
+                                                        name="status"
+                                                        value="Open"
+                                                        checked={formData.status === "Open"}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label htmlFor="statusOpen">Open</label>
+                                                </div>
+                                                <div className="col-4 form-check border p-2 me-1 rounded text-center">
+                                                    <input
+                                                        type="radio"
+                                                        id="statusPending"
+                                                        name="status"
+                                                        value="Pending"
+                                                        checked={formData.status === "Pending"}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label htmlFor="statusPending">Pending</label>
+                                                </div>
+                                                <div className="col-4 form-check border p-2 me-1 rounded text-center">
+                                                    <input
+                                                        type="radio"
+                                                        id="statusSolved"
+                                                        name="status"
+                                                        value="Solved"
+                                                        checked={formData.status === "Solved"}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label htmlFor="statusSolved">Solved</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="d-flex justify-content-between">
+                                            <button
+                                                type="button"
+                                                className="btn btn-outline-secondary"
+                                                onClick={() => setShowModal(false)}
+                                                style={{ width: "49%" }}
+                                            >
+                                                Cancel
+                                            </button>
+                                            <button type="submit" className="btn  btn-primary" style={{ width: "49%" }}>
+                                            Create
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div className="col">
-                              <label htmlFor="unit" className="form-label">Unit<span className='text-danger'>*</span></label>
-                              <input type="text" className="form-control" id="unit" defaultValue="1001" required />
-                            </div>
-                          </div>
-                          <div className="my-1">
-                          <label className="form-label">Priority<span className='text-danger'>*</span></label>
-                          <div className="d-flex gap-2d-flex justify-content-evenly">
-                            <div className="col-4 form-check border p-2 me-1 rounded text-center">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">High</label>
-                            </div>
-                            <div className="col-4 form-check  border p-2 me-1 rounded text-center">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">Medium</label>
-                            </div>
-                            <div className="col-4 form-check  border p-2 rounded text-center">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">Low</label>
-                            </div>
-                          </div>
                         </div>
-                        <div className="">
-                          <label className="form-label">Status<span className='text-danger'>*</span></label>
-                          <div className="d-flex gap-2d-flex justify-content-evenly">
-                            <div className="col-4 form-check border me-1 p-2 rounded text-center ">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">Open</label>
-                            </div>
-                            <div className="col-4 form-check  border me-1 p-2 rounded text-center">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">Pending</label>
-                            </div>
-                            <div className="col-4 form-check  border p-2 rounded text-center">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">Solve</label>
-                            </div>
-                          </div>
-                        </div>
-                        </form>
-                      </div>
-                      <div className="modal-footer justify-content-between">
-                        <button type="button" className="btn btn-secondary" style={{ width: "46%" }} onClick={handleCloseCreateModal}>Cancel</button>
-                        <button type="button" className="btn-primary btn" style={{ width: "46%" }}>Save</button>
-                      </div>
                     </div>
-                  </div>
-                </div>
-              </>
+                </>
             )}
 
             {/* Delete Confirmation Modal */}
@@ -234,13 +321,13 @@ const ComplaintSubmission = () => {
                         <div className="modal-content">
                             <div className="modal-body text-center">
                                 <h5 className="modal-title mb-3">
-                                    Delete {selectedNote?.title}?
+                                    Delete {selectedComplaint?.title}?
                                 </h5>
                                 <p>Are you sure you want to delete this?</p>
                                 <div className="d-flex justify-content-center">
                                     <button
                                         type="button"
-                                        className="btn btn-secondary me-2"
+                                        className="btn  btn-outline-secondary me-2"
                                         onClick={handleCloseDeleteModal}
                                         style={{ width: "48%" }}
                                     >
@@ -264,266 +351,286 @@ const ComplaintSubmission = () => {
     );
 };
 
-const NoteCard = ({ note, isOpen, onToggleDropdown, onDeleteClick }) => {
-    return (
-        <div className="col-md-3 mb-4">
-            <div className="card shadow-sm border-0 note-card bg-white">
-                {/* Card Header */}
-                <div
-                    className="d-flex justify-content-between align-items-center p-2 rounded-top"
-                    style={{ backgroundColor: "#5678e9", color: "#fff" }}
-                >
-                    <h5
-                        className="card-title mb-0"
-                        style={{ fontSize: "14px"}}
-                    >
-                        {note.title}
-                    </h5>
-                    <img
-                        src="src/Images/menu.png"
-                        alt="Menu"
-                        style={{ width: "20px", height: "20px", cursor: "pointer" }}
-                        onClick={onToggleDropdown}
-                    />
-                    {isOpen && (
-                        <div
-                            className="dropdown-menu show"
-                            style={{
-                                position: "absolute",
-                                top: "40px",
-                                right: "10px",
-                                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                            }}
-                        >
-                            <button
-                                className="dropdown-item"
-                                onClick={() => onDeleteClick(note)}
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    )}
-                </div>
-
-                {/* Card Body */}
-                <div className="card-body">
-                    {/* Request Date */}
-                    <div className="d-flex justify-content-between mb-2">
-                        <span className="text-muted" style={{ fontSize: "12px" }}>
-                            Request Date
-                        </span>
-                        <span
-                            style={{
-                                fontSize: "12px",
-                                fontWeight: "bold",
-                            }}
-                        >
-                            {note.Date}
-                        </span>
-                    </div>
-
-                    {/* Status */}
-                    <div className="d-flex justify-content-between mb-2">
-                        <span className="text-muted" style={{ fontSize: "12px" }}>
-                            Status
-                        </span>
-                        <span
-                            className="badge bg-light text-primary"
-                            style={{
-                                fontSize: "12px",
-                                padding: "5px 10px",
-                                borderRadius: "20px",
-                                fontWeight: "bold",
-                            }} > Open
-                        </span>
-                    </div>
-
-                    {/* Description */}
-                    <div>
-                        <h6 className="text-muted mb-1" style={{ fontSize: "12px" }}  >
-                            Description
-                        </h6>
-                        <p className="text-normal mb-0" style={{ fontSize: "12px" }}>{note.description} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
-
-
-
 const RequestSubmission = () => {
-    const notes = [
-        {
-            title: "Unethical Behavior",
-            description: "Regular waste collection services.",
-            Date: "01/07/2024",
-        },
-        {
-            title: "Preventive Measures",
-            description: "Expenses will way sense for you.",
-            Date: "01/07/2024",
-        },
-        {
-            title: "Unethical Behavior",
-            description: "Providing information deliberately.",
-            Date: "01/07/2024",
-        },
-        {
-            title: "Preventive Measures",
-            description: "Regular waste collection services.",
-            Date: "01/07/2024",
-        },
-        {
-            title: "Unethical Behavior",
-            description: "Regular waste collection services.",
-            Date: "01/07/2024",
-        },
-        {
-            title: "Preventive Measures",
-            description: "Regular waste collection services.",
-            Date: "01/07/2024",
-        },
-    ];
+    const [showModal, setShowModal] = useState(false);
+    const [complaints, setComplaints] = useState([]);
+    const [formData, setFormData] = useState({
+        title: "",
+        requestDate: "",
+        description: "",
+        status: "Open",
+    });
 
-   
     const [dropdownIndex, setDropdownIndex] = useState(null);
-    const [showCreateModal, setShowCreateModal] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
-    const [selectedNote, setSelectedNote] = useState(null);
+    const [selectedComplaint, setSelectedComplaint] = useState(null);
 
-    const toggleDropdown = (index) => {
-        setDropdownIndex(dropdownIndex === index ? null : index);
+    // Handle form input changes
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
-    const handleShowCreateModal = () => setShowCreateModal(true);
-    const handleCloseCreateModal = () => setShowCreateModal(false);
+    // Handle form submission
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setComplaints([...complaints, { ...formData, id: Date.now() }]);
+        setFormData({ title: "", requestDate: "", description: "", status: "Open" });
+        setShowModal(false);
+    };
 
-    const handleDeleteClick = (note) => {
-        setSelectedNote(note);
+    // Handle dropdown toggle
+    const toggleDropdown = (id) => {
+        setDropdownIndex(dropdownIndex === id ? null : id);
+    };
+
+    // Show delete modal
+    const handleDeleteClick = (complaint) => {
+        setSelectedComplaint(complaint);
         setShowDeleteModal(true);
     };
 
-    const handleCloseDeleteModal = () => {
+    // Confirm delete action
+    const handleConfirmDelete = () => {
+        setComplaints(complaints.filter((c) => c.id !== selectedComplaint.id));
         setShowDeleteModal(false);
-        setSelectedNote(null);
+        setSelectedComplaint(null);
     };
 
-    const handleConfirmDelete = () => {
-        console.log("Deleting:", selectedNote);
-        handleCloseDeleteModal();
+    // Close delete modal
+    const handleCloseDeleteModal = () => {
+        setShowDeleteModal(false);
+        setSelectedComplaint(null);
     };
     return (
-        <div className="container-fluid pt-3 mt-3 financial-management">
-            <div className="d-flex justify-content-between align-items-center mb-3 text-dark">
+        <div className="container-fluid pt-3 mt-3">
+            <div className="d-flex justify-content-between align-items-center mb-3">
                 <h2 style={{ fontSize: "20px" }}>Request</h2>
-                <button className="btn btn-primary "  onClick={handleShowCreateModal}>Create Request</button>
+                <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+                Create Request
+                </button>
             </div>
+
+            {/* Complaint Cards */}
             <div className="row">
-                {notes.map((note, index) => (
-                    <NoteCard1
-                        key={index}
-                        note={note}
-                        isOpen={dropdownIndex === index}
-                        onToggleDropdown={() => toggleDropdown(index)}
-                    
-                        onDeleteClick={() => handleDeleteClick(note)}
-                    />
+                {complaints.map((complaint) => (
+                    <div className="col-md-3 mb-3" key={complaint.id}>
+                        <div className="card shadow-sm border-0 note-card bg-white">
+                            <div
+                                className="d-flex justify-content-between align-items-center p-2 rounded-top"
+                                style={{ backgroundColor: "#5678e9", color: "#fff" }} >
+                                <h5 className="card-title mb-0" style={{ fontSize: "14px" }}>
+                                    {complaint.title}
+                                </h5>
+                                <img
+                                    src="src/Images/menu.png"
+                                    role="button"
+                                    tabIndex="0"
+                                    alt="Menu"
+                                    style={{ width: "20px", height: "20px", cursor: "pointer" }}
+                                    onClick={() => toggleDropdown(complaint.id)}
+                                />
+                                {dropdownIndex === complaint.id && (
+                                    <div className="dropdown-menu show"
+                                        style={{
+                                            position: "absolute", top: "40px", right: "10px",
+                                            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+                                        }}>
+                                        <button className="dropdown-item"
+                                            onClick={() => handleDeleteClick(complaint)}  > Delete
+                                        </button>
+                                    </div>
+                                )}
+                            </div>
+                            <div className="card-body">
+                                {/* Request Date */}
+                                <div className="d-flex justify-content-between mb-2">
+                                    <span className="text-muted" style={{ fontSize: "12px" }}>
+                                        Request Date
+                                    </span>
+                                    <span
+                                        style={{ fontSize: "12px", fontWeight: "bold", }} >
+                                            {complaint.requestDate}
+                                    </span>
+                                </div>
+
+                                {/* Status */}
+                                <div className="d-flex justify-content-between mb-2">
+                                    <span className="text-muted" style={{ fontSize: "12px" }}>
+                                        Status
+                                    </span>{" "}
+                                    <span
+                                        className={`badge1 ${complaint.status === "Open"
+                                            ? "open"
+                                            : complaint.status === "Pending"
+                                                ? "pending"
+                                                : "solve"
+                                            }`}
+                                    >
+                                        {complaint.status}
+                                    </span>
+                                </div>
+
+                                {/* Description */}
+                                <div>
+                                    <h6 className="text-muted mb-1" style={{ fontSize: "12px" }}  >
+                                        Description
+                                    </h6>
+                                    <p className="text-normal mb-0" style={{ fontSize: "12px" }}>{complaint.description} </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ))}
             </div>
-             {/* Create Request Modal */}
-             {showCreateModal && (
-              <>
-                <div className="modal-backdrop show"></div>
-                <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
-                  <div className="modal-dialog modal-dialog-centered">
-                    <div className="modal-content" style={{ width: "400px" }}>
-                      <div className="modal-header">
-                        <h5 className="modal-title">Create Request</h5>
-                        <button type="button" className="btn-close" onClick={handleCloseCreateModal}></button>
-                      </div>
-                      <div className="modal-body">
-                        <form>
-                          <div className="mb-1">
-                            <label htmlFor="complainerName" className="form-label">Requester Name <span className='text-danger'>*</span></label>
-                            <input type="text" className="form-control" id="complainerName" defaultValue="Evelyn Harper" required />
-                          </div>
-                          <div className="mb-1">
-                            <label htmlFor="complaintName" className="form-label"> Request Name<span className='text-danger'>*</span></label>
-                            <input type="text" className="form-control" id="complaintName" defaultValue="Unethical Behavior" required />
-                          </div>
-                          <div className="mb-1">
-                            <label htmlFor="description" className="form-label">Request Date<span className='text-danger'>*</span></label>
-                            <input type="date" className="form-control" id="complaintName" defaultValue="" required />
-                          </div>
-                          <div className="row">
-                            <div className="col">
-                              <label htmlFor="wing" className="form-label">Wing<span className='text-danger'>*</span></label>
-                              <input type="text" className="form-control" id="wing" defaultValue="A" required />
+
+            {/* Create  Request Modal */}
+            {showModal && (
+                <>
+                    <div className="modal-backdrop show"></div>
+                    <div
+                        className="modal fade show d-block"
+                        tabIndex="-1"
+                        role="dialog"
+                        style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                    >
+                        <div className="modal-dialog modal-dialog-centered">
+                            <div className="modal-content" style={{ maxWidth: "400px" }}>
+                                <div className="modal-header">
+                                    <h5 className="modal-title">Create  Request</h5>
+                                    <button
+                                        type="button"
+                                        className="btn-close"
+                                        onClick={() => setShowModal(false)}
+                                    ></button>
+                                </div>
+                                <div className="modal-body">
+                                    <form onSubmit={handleSubmit}>
+                                        {/* Title */}
+                                        <div className="mb-3">
+                                            <label htmlFor="title" className="form-label">
+                                                Title<span className="text-danger">*</span>
+                                            </label>
+                                            <input type="text" className="form-control" id="title" name="title" value={formData.title}
+                                                onChange={handleChange} required />
+                                        </div>
+
+                                        {/* Request Date */}
+                                        <div className="mb-3">
+                                            <label htmlFor="requestDate" className="form-label">
+                                                Request Date<span className="text-danger">*</span>
+                                            </label>
+                                            <input type="date" className="form-control" id="requestDate" name="requestDate"
+                                                value={formData.requestDate} onChange={handleChange} required/>
+                                        </div>
+
+                                        {/* Description */}
+                                        <div className="mb-3">
+                                            <label htmlFor="description" className="form-label">
+                                                Description<span className="text-danger">*</span>
+                                            </label>
+                                            <textarea className="form-control"
+                                                id="description"
+                                                name="description"
+                                                rows="3"
+                                                value={formData.description}
+                                                onChange={handleChange}
+                                                required
+                                            ></textarea>
+                                        </div>
+                                        {/* Status */}
+                                        <div className="mb-3">
+                                            <label className="form-label">Status</label>
+                                            <div className="d-flex gap-2d-flex justify-content-evenly">
+                                                <div className="col-4 form-check border p-2 me-1 rounded text-center">
+                                                    <input
+                                                        type="radio"
+                                                        id="statusOpen"
+                                                        name="status"
+                                                        value="Open"
+                                                        checked={formData.status === "Open"}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label htmlFor="statusOpen">Open</label>
+                                                </div>
+                                                <div className="col-4 form-check border p-2 me-1 rounded text-center">
+                                                    <input
+                                                        type="radio"
+                                                        id="statusPending"
+                                                        name="status"
+                                                        value="Pending"
+                                                        checked={formData.status === "Pending"}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label htmlFor="statusPending">Pending</label>
+                                                </div>
+                                                <div className="col-4 form-check border p-2 me-1 rounded text-center">
+                                                    <input
+                                                        type="radio"
+                                                        id="statusSolved"
+                                                        name="status"
+                                                        value="Solved"
+                                                        checked={formData.status === "Solved"}
+                                                        onChange={handleChange}
+                                                    />
+                                                    <label htmlFor="statusSolved">Solved</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="d-flex justify-content-between">
+                                            <button
+                                                type="button"
+                                                className="btn btn-outline-secondary"
+                                                onClick={() => setShowModal(false)}
+                                                style={{ width: "49%" }}
+                                            >
+                                                Cancel
+                                            </button>
+                                            <button type="submit" className="btn  btn-primary" style={{ width: "49%" }}>
+                                            Create
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            <div className="col">
-                              <label htmlFor="unit" className="form-label">Unit<span className='text-danger'>*</span></label>
-                              <input type="text" className="form-control" id="unit" defaultValue="1001" required />
-                            </div>
-                          </div>
-                          <div className="my-1">
-                          <label className="form-label">Priority<span className='text-danger'>*</span></label>
-                          <div className="d-flex gap-2d-flex justify-content-evenly">
-                            <div className="col-4 form-check border p-2 me-1 rounded text-center">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">High</label>
-                            </div>
-                            <div className="col-4 form-check  border p-2 me-1 rounded text-center">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">Medium</label>
-                            </div>
-                            <div className="col-4 form-check  border p-2 rounded text-center">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">Low</label>
-                            </div>
-                          </div>
                         </div>
-                        <div className="">
-                          <label className="form-label">Status<span className='text-danger'>*</span></label>
-                          <div className="d-flex gap-2d-flex justify-content-evenly">
-                            <div className="col-4 form-check border me-1 p-2 rounded text-center ">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">Open</label>
-                            </div>
-                            <div className="col-4 form-check  border me-1 p-2 rounded text-center">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">Pending</label>
-                            </div>
-                            <div className="col-4 form-check  border p-2 rounded text-center">
-                                <input type="radio" id="Red" name="colors" defaultValue="Red" value="High" />
-                                <label className='ms-1' htmlFor="Red">Solve</label>
-                            </div>
-                          </div>
-                        </div>
-                        </form>
-                      </div>
-                      <div className="modal-footer justify-content-between">
-                        <button type="button" className="btn btn-secondary" style={{ width: "46%" }} onClick={handleCloseCreateModal}>Cancel</button>
-                        <button type="button" className="btn-primary btn" style={{ width: "46%" }}>Save</button>
-                      </div>
                     </div>
-                  </div>
-                </div>
-              </>
+                </>
             )}
 
             {/* Delete Confirmation Modal */}
             {showDeleteModal && (
-                <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+                <div
+                    className="modal fade show d-block"
+                    tabIndex="-1"
+                    role="dialog"
+                    style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
+                >
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-body text-center">
-                                <h5 className="modal-title mb-3">Delete {selectedNote?.title}?</h5>
+                                <h5 className="modal-title mb-3">
+                                    Delete {selectedComplaint?.title}?
+                                </h5>
                                 <p>Are you sure you want to delete this?</p>
                                 <div className="d-flex justify-content-center">
-                                    <button type="button" className="btn btn-secondary me-2" onClick={handleCloseDeleteModal} style={{ width: "48%" }}>Cancel</button>
-                                    <button type="button" className="btn btn-danger" onClick={handleConfirmDelete} style={{ width: "48%" }}>Delete</button>
+                                    <button
+                                        type="button"
+                                        className="btn  btn-outline-secondary me-2"
+                                        onClick={handleCloseDeleteModal}
+                                        style={{ width: "48%" }}
+                                    >
+                                        Cancel
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-danger"
+                                        onClick={handleConfirmDelete}
+                                        style={{ width: "48%" }}
+                                    >
+                                        Delete
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -534,92 +641,92 @@ const RequestSubmission = () => {
     );
 };
 
-const NoteCard1 = ({ note, isOpen, onToggleDropdown, onDeleteClick }) => {
-    return (
-        <div className="col-md-3 mb-4">
-            <div className="card shadow-sm border-0 note-card bg-white">
-                {/* Card Header */}
-                <div
-                    className="d-flex justify-content-between align-items-center p-2 rounded-top"
-                    style={{ backgroundColor: "#5678e9", color: "#fff" }}
-                >
-                    <h5
-                        className="card-title mb-0"
-                        style={{ fontSize: "14px"}}
-                    >
-                        {note.title}
-                    </h5>
-                    <img
-                        src="src/Images/menu.png"
-                        alt="Menu"
-                        style={{ width: "20px", height: "20px", cursor: "pointer" }}
-                        onClick={onToggleDropdown}
-                    />
-                    {isOpen && (
-                        <div
-                            className="dropdown-menu show"
-                            style={{
-                                position: "absolute",
-                                top: "40px",
-                                right: "10px",
-                                boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-                            }}
-                        >
-                            <button
-                                className="dropdown-item"
-                                onClick={() => onDeleteClick(note)}
-                            >
-                                Delete
-                            </button>
-                        </div>
-                    )}
-                </div>
+// const NoteCard1 = ({ note, isOpen, onToggleDropdown, onDeleteClick }) => {
+//     return (
+//         <div className="col-md-3 mb-4">
+//             <div className="card shadow-sm border-0 note-card bg-white">
+//                 {/* Card Header */}
+//                 <div
+//                     className="d-flex justify-content-between align-items-center p-2 rounded-top"
+//                     style={{ backgroundColor: "#5678e9", color: "#fff" }}
+//                 >
+//                     <h5
+//                         className="card-title mb-0"
+//                         style={{ fontSize: "14px" }}
+//                     >
+//                         {note.title}
+//                     </h5>
+//                     <img
+//                         src="src/Images/menu.png"
+//                         alt="Menu"
+//                         style={{ width: "20px", height: "20px", cursor: "pointer" }}
+//                         onClick={onToggleDropdown}
+//                     />
+//                     {isOpen && (
+//                         <div
+//                             className="dropdown-menu show"
+//                             style={{
+//                                 position: "absolute",
+//                                 top: "40px",
+//                                 right: "10px",
+//                                 boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+//                             }}
+//                         >
+//                             <button
+//                                 className="dropdown-item"
+//                                 onClick={() => onDeleteClick(note)}
+//                             >
+//                                 Delete
+//                             </button>
+//                         </div>
+//                     )}
+//                 </div>
 
-                {/* Card Body */}
-                <div className="card-body">
-                    {/* Request Date */}
-                    <div className="d-flex justify-content-between mb-2">
-                        <span className="text-muted" style={{ fontSize: "12px" }}>
-                            Request Date
-                        </span>
-                        <span
-                            style={{
-                                fontSize: "12px",
-                                fontWeight: "bold",
-                            }}
-                        >
-                            {note.Date}
-                        </span>
-                    </div>
+//                 {/* Card Body */}
+//                 <div className="card-body">
+//                     {/* Request Date */}
+//                     <div className="d-flex justify-content-between mb-2">
+//                         <span className="text-muted" style={{ fontSize: "12px" }}>
+//                             Request Date
+//                         </span>
+//                         <span
+//                             style={{
+//                                 fontSize: "12px",
+//                                 fontWeight: "bold",
+//                             }}
+//                         >
+//                             {note.Date}
+//                         </span>
+//                     </div>
 
-                    {/* Status */}
-                    <div className="d-flex justify-content-between mb-2">
-                        <span className="text-muted" style={{ fontSize: "12px" }}>
-                            Status
-                        </span>
-                        <span
-                            className="badge bg-light text-primary"
-                            style={{
-                                fontSize: "12px",
-                                padding: "5px 10px",
-                                borderRadius: "20px",
-                                fontWeight: "bold",
-                            }} > Open
-                        </span>
-                    </div>
+//                     {/* Status */}
+//                     <div className="d-flex justify-content-between mb-2">
+//                         <span className="text-muted" style={{ fontSize: "12px" }}>
+//                             Status
+//                         </span>
+//                         <span
+//                             className="badge bg-light text-primary"
+//                             style={{
+//                                 fontSize: "12px",
+//                                 padding: "5px 10px",
+//                                 borderRadius: "20px",
+//                                 fontWeight: "bold",
+//                             }} > Open
+//                         </span>
+//                     </div>
 
-                    {/* Description */}
-                    <div>
-                        <h6 className="text-muted mb-1" style={{ fontSize: "12px" }}  >
-                            Description
-                        </h6>
-                        <p className="text-normal mb-0" style={{ fontSize: "12px" }}>{note.description} </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-};
+//                     {/* Description */}
+//                     <div>
+//                         <h6 className="text-muted mb-1" style={{ fontSize: "12px" }}  >
+//                             Description
+//                         </h6>
+//                         <p className="text-normal mb-0" style={{ fontSize: "12px" }}>{note.description} </p>
+//                     </div>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// };
 
 
 export default Complaint;
