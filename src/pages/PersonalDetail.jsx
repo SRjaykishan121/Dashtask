@@ -333,7 +333,7 @@ function PersonalDetail() {
                   <h5 className="mb-0" style={{ fontSize: "14px"}}>
                     {note.title}
                   </h5>
-                  <span className="badge1 Owner1">Pending</span>
+                  <span className="badge1 Owner1 fw-normal">Pending</span>
                 </div>
                           {/* Card Body */}
                         
@@ -382,7 +382,7 @@ function PersonalDetail() {
                   <h5 className="mb-0" style={{ fontSize: "14px"}}>
                     {note.title}
                   </h5>
-                  <span className="badge1 Owner">Pending</span>
+                  <span className="badge1 Owner1 fw-normal">Pending</span>
                 </div>
                           {/* Card Body */}
                         

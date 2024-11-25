@@ -17,6 +17,9 @@ import Complaint from './pages/Complaint';
 import SecurityProtocols from './pages/SecurityProtocols';
 import PersonalDetail from './pages/PersonalDetail';
 import PersonalDetailTenant from './pages/PersonalDetailTenant';
+import MaintenanceInvoices from './pages/MaintenanceInvoices';
+import Invoices from './pages/Invoices';
+import OtherIncomeInvoice from './pages/OtherIncomeInvoice';
 function App() {
   return (
     <div className="d-flex"> {/* Flexbox container to position sidebar and content side by side */}
@@ -38,6 +41,9 @@ function App() {
           <Route path='/SecurityProtocols' element={<SecurityProtocols/>}/>
           <Route path='/PersonalDetail' element={<PersonalDetail/>}/>
           <Route path='/PersonalDetailTenant' element={<PersonalDetailTenant />}/>
+          <Route path='/MaintenanceInvoices' element={<MaintenanceInvoices />}/>
+          <Route path='/Invoices' element={<Invoices />}/>
+          <Route path='/OtherIncomeInvoice' element={<OtherIncomeInvoice/>}/>
         </Routes>
       </div>
     </div>
