@@ -20,6 +20,8 @@ import PersonalDetailTenant from './pages/PersonalDetailTenant';
 import MaintenanceInvoices from './pages/MaintenanceInvoices';
 import Invoices from './pages/Invoices';
 import OtherIncomeInvoice from './pages/OtherIncomeInvoice';
+import VisitorTracking from './pages/VisitorTracking';
+import EmergencyManagement from './pages/EmergencyManagement';
 function App() {
   return (
     <div className="d-flex"> {/* Flexbox container to position sidebar and content side by side */}
@@ -44,6 +46,8 @@ function App() {
           <Route path='/MaintenanceInvoices' element={<MaintenanceInvoices />}/>
           <Route path='/Invoices' element={<Invoices />}/>
           <Route path='/OtherIncomeInvoice' element={<OtherIncomeInvoice/>}/>
+          <Route path='/VisitorTracking' element={<VisitorTracking/>}/>
+          <Route path='/EmergencyManagement' element={<EmergencyManagement/>}/>
         </Routes>
       </div>
     </div>

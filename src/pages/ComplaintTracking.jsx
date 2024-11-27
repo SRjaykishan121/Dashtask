@@ -79,7 +79,7 @@ function ComplaintTracking() {
                         <img src="src/Images/image.png" alt="Complainer" className="complainer-image mb-2 me-2" />
                         EstherHoward
                       </td>
-                      <td>Preventive Measures</td>
+                      <td>PreventiveMeasures</td>
                       <td>Regular waste collection services.</td>
                       <td><span className="status open">B</span> 1002</td>
                       <td><span className="badge badge-low">Low</span></td>
@@ -133,7 +133,7 @@ function ComplaintTracking() {
                         <img src="src/Images/image.png" alt="Complainer" className="complainer-image mb-2 me-2" />
                         Guy Hawkins
                       </td>
-                      <td>Preventive Measures</td>
+                      <td>PreventiveMeasures</td>
                       <td>Regular waste collection services.</td>
                       <td><span className="status open">D</span> 1004</td>
                       <td><span className="badge badge-medium">Medium</span></td>
@@ -187,7 +187,7 @@ function ComplaintTracking() {
                         <img src="src/Images/image.png" alt="Complainer" className="complainer-image mb-2 me-2" />
                         Jacob Jones
                       </td>
-                      <td>Preventive Measures</td>
+                      <td>PreventiveMeasures</td>
                       <td>Regular waste collection services.</td>
                       <td><span className="status open">F</span> 1006</td>
                       <td><span className="badge badge-high">High</span></td>

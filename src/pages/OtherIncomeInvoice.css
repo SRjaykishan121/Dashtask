@@ -21,12 +21,6 @@
     font-size: 14px;
     line-height: 1.5;
   }
-  
-  .modal-footer {
-    border-top: 1px solid #dee2e6;
-    background-color: #f8f9fa;
-  }
-  
   .btn-warning {
     background-color: #f97316;
     border-color: #f97316;
@@ -37,4 +31,7 @@
   strong{
     font-weight: normal;
     color: #A7A7A7;
+  }
+  input[type="radio"]:checked {
+    accent-color: #fd6208; /* Applies orange color when checked */
   }

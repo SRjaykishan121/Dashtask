@@ -108,6 +108,16 @@ const SideBar = () => {
                 <span>@ Resident Other Income Invoice</span>
               </Link>
             </li>
+            <li className="p-3">
+              <Link to="/VisitorTracking" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
+                <span>@ Security Visitor Tracking</span>
+              </Link>
+            </li>
+            <li className="p-3">
+              <Link to="/EmergencyManagement" className="d-flex align-items-center text-dark" style={{ textDecoration: "none" }}>
+                <span>@ Security Emergency Management</span>
+              </Link>
+            </li>
           </ul>
         </div>
         <hr />
