@@ -167,3 +167,18 @@ header {
   width: 1640px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
+/* Container */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 20px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f4f4;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #202224;
+  border-radius: 10px;
+}
