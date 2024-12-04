@@ -10,7 +10,7 @@ function RequestTracking() {
           <div className="col-12" >
             <div className="border rounded complaint-list p-3 mt-3 mb-3 bg-white"style={{ height: '600px' }}>
               <div className="d-flex justify-content-between mb-3 text-dark">
-                <h2 style={{ fontSize: "20px" }}>Security Protocols</h2>
+                <h2 style={{ fontSize: "20px" }}>Security Protocols   ghgghghghg</h2>
               </div>
               <div className="table-responsive mt-2">
                 <table className="table rounded-table1 ">
