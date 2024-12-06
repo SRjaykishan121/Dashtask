@@ -137,7 +137,7 @@ const ResidentManagement = () => {
               {showAddModal && (
                 <>
                   <div className="modal-backdrop show"></div>
-                  <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,0.5)" }}>
+                  <div className="modal fade show d-block" tabIndex="-1" role="dialog" style={{ backgroundColor: "rgba(0,0,0,.8)" }}>
                     <div className="modal-dialog">
                       <div className="modal-content" style={{ width: "400px", height: "420px", marginTop:"200px" }}>
                         <div className="modal-header">
